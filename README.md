@@ -7,84 +7,83 @@ Elle permet d’apprendre ou de retrouver les noms et prénoms de personnes à p
 
 ## Fonctionnement
 
-L'interface comporte trois zones. La zone gauche donne des informations sur la personne. La zone en haut à droite permet de répondre aux questions. Et la zone en bas à droite permet d'effectuer les réglages (n'oubliez pas le bouton Valider !)
+L'interface comporte trois zones :  
+- **Zone gauche** : affiche les informations sur la personne.  
+- **Zone en haut à droite** : permet de répondre aux questions.  
+- **Zone en bas à droite** : permet d'effectuer les réglages (n'oubliez pas le bouton **Valider** !).  
 
 ![interface](fichiers/images/interface.png)
 
-Du bas vers le haut dans la zone en bas à droite :
+De bas en haut, dans la zone en bas à droite :  
 
-1. On sélectionne ce que l'on souhaite :
-   - prénom et nom
-   - prénom seul
-   - nom seul
-2. On peut sélectionner un mode aléatoire (dans le désordre).
-3. On choisit le Département puis la fonction avec les deux combobox
-4. L’application propose plusieurs modes d’utilisation :
-   - **Apprentissage** : affichage des personnes et de leurs informations.
-   - **Test écrit** : l’utilisateur doit saisir les noms ou prénoms.
-   - **Test oral** : affichage d’une photo. L’utilisateur doit chercher mentalement avant de voir la correction.
-   - **Recherche** : permet de retrouver un élève à partir d’un nom ou prénom.
-4. Les quatre boutons sous l’image permettent de faire défiler les images sélectionnées.
-5. la zone de saisie (en haut à droite) est utilisé dans les tests écrits et de
+1. Sélection de ce que l'on souhaite afficher :  
+   - prénom et nom  
+   - prénom seul  
+   - nom seul  
+2. Activation optionnelle du **mode aléatoire** (présentation dans le désordre).  
+3. Choix du **Département** puis de la **Fonction** via les deux listes déroulantes (*combobox*).  
+4. Choix du **mode d’utilisation** :  
+   - **Apprentissage** : affichage des personnes et de leurs informations.  
+   - **Test écrit** : l’utilisateur doit saisir les noms ou prénoms.  
+   - **Test oral** : affichage d’une photo, l’utilisateur cherche mentalement avant de voir la correction.  
+   - **Recherche** : retrouver une personne à partir d’un nom ou prénom.  
+5. Les quatre boutons sous l’image permettent de faire défiler les personnes sélectionnées.  
+6. La zone de saisie (en haut à droite) est utilisée dans les tests écrits et pour certaines recherches.
 
 ## Vidéo
 
-[Vidéo de MémoVue](https://www.youtube.com/watch?v=x7tPYEc-3mk)
+[Vidéo de présentation de MémoVue](https://www.youtube.com/watch?v=x7tPYEc-3mk)
 
 ## Installation
 
-1. **Installation de Python sous Windows** :  
-   Dans la partie Stable Releases :  
-   [Installation Python - Windows](https://www.python.org/downloads/windows/)
+### GNU/Linux
 
-2. **Cloner le dépôt** :
-
+1. **Cloner le dépôt**  
    ```bash
    git clone https://github.com/GerardLeRest/MemoVue
    cd MemoVue
    ```
 
-3. **Créer un environnement virtuel** :  
-   `venv` doit être installé. `mon_env` est le nom de l'environnement Python.
+2. **Créer un environnement virtuel**  
+   `venv` doit être installé. Ici, *mon_env* est le nom choisi pour l'environnement Python.  
+   ```bash
+   python3 -m venv mon_env
+   source mon_env/bin/activate
+   ```
 
-   - Sous Ubuntu :
+3. **Installer la dépendance**  
+   MémoVue utilise la bibliothèque **PySide6** pour l’interface graphique :  
+   ```bash
+   pip install pyside6
+   ```
 
-     ```bash
-     python3 -m venv mon_env
-     source mon_env/bin/activate
-     ```
+### Windows
 
-   - Sous Windows :
-     - CTRL + Shift + P
-     - Python: Select Interpreter
-     - Create Virtual Environment  
-     Un dossier `.env` est créé
+1. **Installer Python**  
+   Dans la partie *Stable Releases* :  
+   [Installation Python - Windows](https://www.python.org/downloads/windows/)
 
-## Dépendances
+2. **Cloner le dépôt**  
+   ```bash
+   git clone https://github.com/GerardLeRest/MemoVue
+   cd MemoVue
+   ```
 
-Le programme nécessite les bibliothèques suivantes :
-
-- `sqlite3` (intégré à Python3 pour la gestion de la base de données — ne pas installer)
-- `PySide6` (bibliothèque graphique à installer)
-
-Pour installer PySide6 :
-
-```bash
-pip install pyside6
-```
+3. **Suivre la vidéo d’installation**  
+   [Tutoriel vidéo d’installation sur Windows](https://www.youtube.com/watch?v=zA2KoJ8Yn4M)
 
 ## Données utilisées
 
-Le programme utilise :
+Le programme utilise :  
 
-- Une base de données SQLite (`eleves.db`, `deputes.db` ou `salaries.db`, à la racine du projet)
-- Des images des personnes (dans un dossier `fichiers/photos/`)
-- Des fichiers CSV pour l'importation initiale (dossier `fichiers/deputes/`, par exemple)  
-  Il y a donc trois organismes indépendants les uns des autres. Il est possible d'ajouter ou modifier un organisme (comme par exemple un club de sport, etc.).
+- Une base de données SQLite (`eleves.db`, `deputes.db` ou `salaries.db` à la racine du projet).  
+- Des images des personnes (dossier `fichiers/photos/`).  
+- Des fichiers CSV pour l’importation initiale (exemple : `fichiers/deputes/`).  
 
-## Lancement
+Trois organismes sont fournis par défaut (Établissement scolaire, Parlement, Entreprise), mais il est possible d’ajouter un organisme personnalisé (ex. club de sport) en créant sa propre base, ses images et ses fichiers CSV.  
+Le choix de l’organisme se fait au lancement, via **ChoixOrganisme.pyw**.
 
-Lancer le programme principal :
+## Lancement - GNU/Linux
 
 ```bash
 python ChoixOrganisme.pyw
@@ -92,19 +91,19 @@ python ChoixOrganisme.pyw
 
 ## Remarques
 
-- Compatible Python 3.8+
-- Testé sous Ubuntu et Windows
+- Compatible Python 3.8+  
+- Testé sous Ubuntu et Windows  
 - L’application est en cours d’amélioration (v0.51)
 
 ## Liens
 
-- Site internet : https://gerardlerest.github.io/memovue/
-- Dépôt GitHub : https://github.com/GerardLeRest/MemoVue
+- [Site internet](https://gerardlerest.github.io/memovue/)  
+- [Dépôt GitHub](https://github.com/GerardLeRest/MemoVue)
 
 ## Licence & photos
 
-Ce projet est distribué sous licence GPL-v3.  
-© 2025 Gérard LE REST
+Ce projet est distribué sous licence **GPL-v3**.  
+© 2025 Gérard LE REST  
 
-Les portraits ont été générés par une intelligence artificielle et sont utilisés dans un cadre pédagogique non commercial.
-"Image by Generated Photos (https://generated.photos), used with permission."
+Les portraits ont été générés par une intelligence artificielle et sont utilisés dans un cadre pédagogique non commercial.  
+*"Image by Generated Photos (https://generated.photos), used with permission."*
