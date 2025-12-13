@@ -1,13 +1,20 @@
+#!/usr/bin/python2
+# -*- coding: utf-8 -*
+
+"""     
+    Fenêtre d'accueil - choix de l'organisme:
+    Ecole, Entreprise, Parlement
+"""
+
 import os
 from PySide6.QtWidgets import (
-    QApplication, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QRadioButton,
-    QPushButton, QSpacerItem, QSizePolicy, QMessageBox
+    QWidget, QVBoxLayout, QLabel, QRadioButton,
+    QPushButton
 )
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QPixmap
-import sys
 import json
-from MemoVue import Fenetre  # Importer la classe MemoVue
+from FenetrePrincipale import Fenetre
 
 class ChoixOrganisme(QWidget):
     """Choisir l'organisme - Parlement - École - Entreprise"""
@@ -99,9 +106,3 @@ class ChoixOrganisme(QWidget):
         self.memoVue = Fenetre(config=config)
         self.memoVue.show()
         self.close()
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    fenetre = ChoixOrganisme()
-    fenetre.show()
-    app.exec()

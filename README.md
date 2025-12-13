@@ -5,9 +5,16 @@
 MémoVue est une application éducative développée en Python avec une interface graphique PySide6.  
 Elle permet d’apprendre ou de retrouver les noms et prénoms de personnes à partir d'une base de données SQLite3.
 
+## Philosophie du logiciel
+
+MémoVue est un outil simple, conçu avant tout pour un usage pédagogique.
+Il privilégie la clarté, la stabilité et la lisibilité du code plutôt que
+l’ajout de fonctionnalités complexes.
+
 ## Fonctionnement
 
 L'interface comporte trois zones :  
+
 - **Zone gauche** : affiche les informations sur la personne.  
 - **Zone en haut à droite** : permet de répondre aux questions.  
 - **Zone en bas à droite** : permet d'effectuer les réglages (n'oubliez pas le bouton **Valider** !).  
@@ -30,22 +37,33 @@ De bas en haut, dans la zone en bas à droite :
 5. Les quatre boutons sous l’image permettent de faire défiler les personnes sélectionnées.  
 6. La zone de saisie (en haut à droite) est utilisée dans les tests écrits et pour certaines recherches.
 
+Le programme utilise:
+
+- Trois bases de données SQLite (`eleves.db`, `deputes.db` ou `salaries.db` à la racine du projet).  
+- Des images des personnes.
+- des fichiers d'initialisation CSV.
+
+Trois organismes sont fournis par défaut (Établissement scolaire, Parlement, Entreprise), mais il est possible d’ajouter un organisme personnalisé (ex. club de sport) en créant sa propre base, ses images et ses fichiers CSV.  
+Le choix de l’organisme se fait au lancement, via **MemoVue.pyw**.
+
 ## Vidéo
 
 [Vidéo de présentation de MémoVue](https://www.youtube.com/watch?v=x7tPYEc-3mk)
 
 ## Installation
 
-### GNU/Linux
+### Depuis les sources
 
 1. **Cloner le dépôt**  
+   
    ```bash
    git clone https://github.com/GerardLeRest/MemoVue
-   cd MemoVue
+   cd Fenetre
    ```
 
 2. **Créer un environnement virtuel**  
    `venv` doit être installé. Ici, *mon_env* est le nom choisi pour l'environnement Python.  
+   
    ```bash
    python3 -m venv mon_env
    source mon_env/bin/activate
@@ -53,47 +71,59 @@ De bas en haut, dans la zone en bas à droite :
 
 3. **Installer la dépendance**  
    MémoVue utilise la bibliothèque **PySide6** pour l’interface graphique :  
+   
    ```bash
    pip install pyside6
    ```
 
 ### Windows
 
-1. **Installer Python**  
-   Dans la partie *Stable Releases* :  
-   [Installation Python - Windows](https://www.python.org/downloads/windows/)
+- Sur https://github.com/GerardLeRest/MemoVue cliquer sur Releases dans la colonnne de droite)
+- Slectionner et télécharger "MemoVue-1.0.0-Setup.exe" 
+- Installer-le sur votre poste Windows.
+- Lancer le logiciel depuis les programmes ou depuis le Bureau
 
-2. **Cloner le dépôt**  
-   ```bash
-   git clone https://github.com/GerardLeRest/MemoVue
-   cd MemoVue
-   ```
+### GNU/Linux
 
-3. **Suivre la vidéo d’installation**  
-   [Tutoriel vidéo d’installation sur Windows](https://www.youtube.com/watch?v=zA2KoJ8Yn4M)
+- Sur https://github.com/GerardLeRest/MemoVue cliquer sur Releases dans la colonnne de droite
 
-## Données utilisées
+- Cliquer sur Releases
 
-Le programme utilise :  
+- Slectionner et télécharger "MemoVue_1.0.0_x86_64.AppImage" ainsi que les trois bases de données *.db
 
-- Une base de données SQLite (`eleves.db`, `deputes.db` ou `salaries.db` à la racine du projet).  
-- Des images des personnes (dossier `fichiers/photos/`).  
-- Des fichiers CSV pour l’importation initiale (exemple : `fichiers/deputes/`).  
+- Créer un dossier ~/MemoVue_data
 
-Trois organismes sont fournis par défaut (Établissement scolaire, Parlement, Entreprise), mais il est possible d’ajouter un organisme personnalisé (ex. club de sport) en créant sa propre base, ses images et ses fichiers CSV.  
-Le choix de l’organisme se fait au lancement, via **ChoixOrganisme.pyw**.
+- Y mettre les trois bases de données et "MemoVue_1.0.0_x86_64.AppImage"
 
-## Lancement - GNU/Linux
-
-```bash
-python ChoixOrganisme.pyw
-```
+- se déplacer dans le dossier
+  
+  ```bash
+  cd  ~/MemoVue_data~
+  ```
+  
+  Rendre le fichier exécutable
+  
+  ```bash
+  chmod +x MemoVue_1.0.0_x86_64.AppImage
+  ```
+  
+  lancer le logiciel
+  
+  ```bash
+  ./MemoVue_1.0.0_x86_64.AppImage
+  ```
+  
+  Installer si vous le souhaitez, Alacarte qui permet d'intégrer votre logiciel au menu
+  
+  ```bash
+  sudo apt install alacarte
+  ```
 
 ## Remarques
 
 - Compatible Python 3.8+  
 - Testé sous Ubuntu et Windows  
-- L’application est en cours d’amélioration (v0.51)
+- L’application est en cours d’amélioration (v1.0.0)
 
 ## Liens
 
@@ -107,3 +137,9 @@ Ce projet est distribué sous licence **GPL-v3**.
 
 Les portraits ont été générés par une intelligence artificielle et sont utilisés dans un cadre pédagogique non commercial.  
 *"Image by Generated Photos (https://generated.photos), used with permission."*
+
+## Philosophie du logiciel
+
+MémoVue est un outil simple, conçu avant tout pour un usage pédagogique.
+Il privilégie la clarté, la stabilité et la lisibilité du code plutôt que
+l’ajout de fonctionnalités complexes.

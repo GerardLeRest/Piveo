@@ -1,11 +1,12 @@
 #!/usr/bin/python2
 # -*- coding: utf-8 -*
 
-#####################################################
+"""
 # selection du mode de fonctionnement
 # (apprentissage, test mental, test ecrit, Rechercher)
 # choix de la classe et de l'option
-#####################################################
+"""
+
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QRadioButton, QPushButton, QGridLayout, QLabel, QComboBox, QCheckBox, QButtonGroup
 from ModifierBDD import ModifierBDD
 from PySide6.QtWidgets import QApplication

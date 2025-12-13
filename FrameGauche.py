@@ -1,11 +1,10 @@
 #!/usr/bin/python2
 # -*- coding: utf-8 -*
 
-##########################################
-# afficher la photo de l'élève sélecctionné
-# et ses informations
-##########################################
-
+"""
+afficher la photo de l'élève sélecctionné
+et ses informations
+"""
 
 import os
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QLineEdit, QGridLayout, QLabel, QHBoxLayout, QPushButton, QSpacerItem, QSizePolicy

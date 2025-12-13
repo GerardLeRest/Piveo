@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*
 
-#####################################################
-# rechercher une ou plusieurs personnes dans 
-# l'établissement
-#####################################################
+"""
+rechercher une ou plusieurs personnes dans 
+l'établissement
+"""
 
 
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QGridLayout, QLabel, QLineEdit, QHBoxLayout, QPushButton, QApplication, QSpacerItem, QSizePolicy, QFrame

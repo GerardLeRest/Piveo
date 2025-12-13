@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*
 
-##################################################
+"""
 # Apprendre ou retrouver le nom/prénom des élèves
 # du lycée
-##################################################
+"""
 
 import os, random, copy, sys
 from FrameGauche import *
@@ -368,19 +368,3 @@ class Fenetre(QMainWindow):
     
     def quitter(self):
         self.close()
-           
-# ----------------------------------------------------
-        
-if __name__ == '__main__':
-    
-    app = QApplication(sys.argv)
-    config = {
-        "Organisme": "entreprise",
-        "Structure": "Départements",
-        "Specialite": "Compétences",
-        "BaseDonnees": "salaries.db",
-        "CheminPhotos": "photos_entreprise"
-    }
-    fenetre = Fenetre(config)
-    fenetre.show()
-    app.exec()
