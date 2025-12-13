@@ -73,7 +73,7 @@ Le choix de l’organisme se fait au lancement, via **MemoVue.pyw**.
 ### Windows
 
 - Aller sur https://github.com/GerardLeRest/MemoVue/releases/tag/v1.0.0 
-- Sélectionner et télécharger "MemoVueSetup-1.0.0.exe" 
+- Sélectionner et télécharger "MemoVueSetup-1.0.0.exe"  ainsi que le dossier zip. Mettre les fichiers à mettre avec l'exécutableble dans un dossier.
 - Installer-le sur votre poste Windows.
 - Lancer le logiciel depuis les programmes ou depuis le Bureau
 
@@ -81,11 +81,11 @@ Le choix de l’organisme se fait au lancement, via **MemoVue.pyw**.
 
 - Aller sur https://github.com/GerardLeRest/MemoVue/releases/tag/v1.0.0
 
-- Sélectionner et télécharger "MemoVue_1.0.0_x86_64.AppImage" ainsi que les trois bases de données *.db
+- Sélectionner et télécharger "MemoVue_1.0.0_x86_64.AppImage" ainsi que le dossier zip. Mettre les fichiers qui seront à mettre avec l'exécutableble dans un dossier.
 
 - Créer un dossier ~/MemoVue_data
 
-- Y mettre les trois bases de données et "MemoVue_1.0.0_x86_64.AppImage"
+- Y mettre les six fichiers et "MemoVue_1.0.0_x86_64.AppImage"
 
 - se déplacer dans le dossier
   
