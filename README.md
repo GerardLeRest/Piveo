@@ -73,15 +73,17 @@ Le choix de l’organisme se fait au lancement, via **MemoVue.pyw**.
 ### Windows
 
 - Aller sur https://github.com/GerardLeRest/MemoVue/releases/tag/v1.0.0 
-- Sélectionner et télécharger "MemoVueSetup-1.0.0.exe"  ainsi que le dossier zip. Mettre les fichiers à mettre avec l'exécutableble dans un dossier.
-- Installer-le sur votre poste Windows.
+- Sélectionner et télécharger "MemoVueSetup-1.0.0.exe"  
+- Suivre les instructions et installer-le sur votre poste Windows.
 - Lancer le logiciel depuis les programmes ou depuis le Bureau
 
 ### GNU/Linux
 
 - Aller sur https://github.com/GerardLeRest/MemoVue/releases/tag/v1.0.0
 
-- Sélectionner et télécharger "MemoVue_1.0.0_x86_64.AppImage" ainsi que le dossier zip. Mettre les fichiers qui seront à mettre avec l'exécutableble dans un dossier.
+- Sélectionner et télécharger "MemoVue_1.0.0_x86_64.AppImage" ainsi que le dossier zip "fichiers". 
+
+- Décompressez "fichiers"
 
 - Créer un dossier ~/MemoVue_data
 
@@ -105,7 +107,7 @@ Le choix de l’organisme se fait au lancement, via **MemoVue.pyw**.
   ./MemoVue_1.0.0_x86_64.AppImage
   ```
   
-  Installer si vous le souhaitez, Alacarte qui permet d'intégrer votre logiciel au menu
+  Installer si vous le souhaitez, Alacarte qui permet d'intégrer votre logiciel au menu très facilement.
   
   ```bash
   sudo apt install alacarte
