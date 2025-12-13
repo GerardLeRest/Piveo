@@ -72,14 +72,14 @@ Le choix de l’organisme se fait au lancement, via **MemoVue.pyw**.
 
 ### Windows
 
-- Aller sur https://github.com/GerardLeRest/MemoVue/releases/tag/v1.0.0, 
+- Aller sur https://github.com/GerardLeRest/MemoVue/releases/tag/v1.0.0 
 - Sélectionner et télécharger "MemoVueSetup-1.0.0.exe" 
 - Installer-le sur votre poste Windows.
 - Lancer le logiciel depuis les programmes ou depuis le Bureau
 
 ### GNU/Linux
 
-- Aller sur https://github.com/GerardLeRest/MemoVue/releases/tag/v1.0.0, 
+- Aller sur https://github.com/GerardLeRest/MemoVue/releases/tag/v1.0.0
 
 - Sélectionner et télécharger "MemoVue_1.0.0_x86_64.AppImage" ainsi que les trois bases de données *.db
 
