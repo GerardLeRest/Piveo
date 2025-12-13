@@ -5,12 +5,6 @@
 MémoVue est une application éducative développée en Python avec une interface graphique PySide6.  
 Elle permet d’apprendre ou de retrouver les noms et prénoms de personnes à partir d'une base de données SQLite3.
 
-## Philosophie du logiciel
-
-MémoVue est un outil simple, conçu avant tout pour un usage pédagogique.
-Il privilégie la clarté, la stabilité et la lisibilité du code plutôt que
-l’ajout de fonctionnalités complexes.
-
 ## Fonctionnement
 
 L'interface comporte trois zones :  
@@ -48,7 +42,7 @@ Le choix de l’organisme se fait au lancement, via **MemoVue.pyw**.
 
 ## Vidéo
 
-[Vidéo de présentation de MémoVue](https://www.youtube.com/watch?v=x7tPYEc-3mk)
+[Vidéo de présentation de MémoVue](https://youtu.be/upmGYy93n2w)
 
 ## Installation
 
@@ -78,18 +72,16 @@ Le choix de l’organisme se fait au lancement, via **MemoVue.pyw**.
 
 ### Windows
 
-- Sur https://github.com/GerardLeRest/MemoVue cliquer sur Releases dans la colonnne de droite)
-- Slectionner et télécharger "MemoVue-1.0.0-Setup.exe" 
+- Aller sur https://github.com/GerardLeRest/MemoVue/releases/tag/v1.0.0, 
+- Sélectionner et télécharger "MemoVueSetup-1.0.0.exe" 
 - Installer-le sur votre poste Windows.
 - Lancer le logiciel depuis les programmes ou depuis le Bureau
 
 ### GNU/Linux
 
-- Sur https://github.com/GerardLeRest/MemoVue cliquer sur Releases dans la colonnne de droite
+- Aller sur https://github.com/GerardLeRest/MemoVue/releases/tag/v1.0.0, 
 
-- Cliquer sur Releases
-
-- Slectionner et télécharger "MemoVue_1.0.0_x86_64.AppImage" ainsi que les trois bases de données *.db
+- Sélectionner et télécharger "MemoVue_1.0.0_x86_64.AppImage" ainsi que les trois bases de données *.db
 
 - Créer un dossier ~/MemoVue_data
 
@@ -137,9 +129,3 @@ Ce projet est distribué sous licence **GPL-v3**.
 
 Les portraits ont été générés par une intelligence artificielle et sont utilisés dans un cadre pédagogique non commercial.  
 *"Image by Generated Photos (https://generated.photos), used with permission."*
-
-## Philosophie du logiciel
-
-MémoVue est un outil simple, conçu avant tout pour un usage pédagogique.
-Il privilégie la clarté, la stabilité et la lisibilité du code plutôt que
-l’ajout de fonctionnalités complexes.

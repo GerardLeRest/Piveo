@@ -1,8 +1,0 @@
-{
-  "Organisme": "Entreprise",
-  "Structure": "Département",
-  "Personne": "Salarié",
-  "Specialite": "Fonctions",
-  "BaseDonnees": "salaries.db",
-  "CheminPhotos": "photos/salaries/"
-}

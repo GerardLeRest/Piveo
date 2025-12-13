@@ -1,9 +1,0 @@
-{
-  "Organisme": "Ecole",
-  "Structure": "Classe",
-  "Personne": "Élève",
-  "Specialite": "Options",
-  "BaseDonnees": "eleves.db",
-  "CheminPhotos": "photos/eleves/"
-}
-

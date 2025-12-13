@@ -5,7 +5,6 @@
     Fenêtre d'accueil - choix de l'organisme:
     Ecole, Entreprise, Parlement
 """
-
 import os
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QLabel, QRadioButton,
@@ -76,7 +75,8 @@ class ChoixOrganisme(QWidget):
 
         # Logo centré
         labelLogo = QLabel()
-        cheminIcone = os.path.join("fichiers","logos", "logoMemoVue.png")
+        dossier_projet = os.path.dirname(os.path.abspath(__file__))
+        cheminIcone = os.path.join(dossier_projet, "fichiers", "logos", "logoMemoVue.png")
         pixmap = QPixmap(cheminIcone)
         if not pixmap.isNull():
             pixmap = pixmap.scaledToWidth(100, Qt.SmoothTransformation)
