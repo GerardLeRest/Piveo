@@ -11,6 +11,7 @@ from PySide6.QtWidgets import QWidget, QVBoxLayout, QLineEdit, QGridLayout, QLab
 from PySide6.QtGui import QPixmap, QIcon
 from PySide6.QtCore import QSize, Qt
 from ModifierBDD import  ModifierBDD
+from utils import get_repertoire_racine
 
 repertoireRacine=os.path.dirname(os.path.abspath(__file__)) # répetoire du fichier pyw
 icones=["Gnome-go-first.png","Gnome-go-previous.png","Gnome-go-next.png","Gnome-go-last.png", ]
@@ -29,6 +30,7 @@ class FrameGauche (QWidget):
         self.modif_bdd = ModifierBDD(config,config["BaseDonnees"])
         self.nbrePers=0 # nbre élèves
         self.resize(150, 100) # définir une taille fixe pour la fenêtre
+        self.repertoire_racine = "" # repertoire du projet
 
        
         # Partie haute du layout
@@ -58,7 +60,8 @@ class FrameGauche (QWidget):
         self.labelImage.setStyleSheet("border: 1px solid #666; background-color: #f0f0f0;")
         self.labelImage.setAlignment(Qt.AlignmentFlag.AlignCenter)
         # Chargement de l'image par défaut
-        cheminDefaut = os.path.join(repertoireRacine, "fichiers", "images", "inconnu.jpg")
+        self.repertoire_racine = get_repertoire_racine() # voir fichier utils.py
+        cheminDefaut = os.path.join(self.repertoire_racine, "fichiers", "images", "inconnu.jpg")
         pixmapDefaut = QPixmap(cheminDefaut).scaled(
             128, 128,
             Qt.AspectRatioMode.KeepAspectRatio,
@@ -74,7 +77,7 @@ class FrameGauche (QWidget):
         self.boutons = []
         for i in range(4):
             bouton = QPushButton()
-            bouton.setIcon(QIcon(os.path.join(repertoireRacine, "fichiers", "icones", icones[i])))
+            bouton.setIcon(QIcon(os.path.join(self.repertoire_racine, "fichiers", "icones", icones[i])))
             bouton.setIconSize(QSize(24, 24))
             bouton.clicked.connect(fonctions[i])
             layoutBoutons.addWidget(bouton)
@@ -166,13 +169,13 @@ class FrameGauche (QWidget):
     def majPhoto(self) -> None:
         """Mise à jour de la photo"""
         nomImage = self.listePersonnes[self.rang][4]
-        cheminImage = os.path.join(repertoireRacine, "fichiers", self.config["CheminPhotos"], nomImage)
+        cheminImage = os.path.join(self.repertoire_racine, "fichiers", self.config["CheminPhotos"], nomImage)
 
         if os.path.exists(cheminImage):
             pixmap = QPixmap(cheminImage)
         else:
             # En cas d’image manquante, image par défaut
-            cheminDefaut = os.path.join(repertoireRacine, "fichiers", "images", "inconnu.jpg")
+            cheminDefaut = os.path.join(self.repertoire_racine, "fichiers", "images", "inconnu.jpg")
             pixmap = QPixmap(cheminDefaut)
         self.labelImage.setPixmap(pixmap)
 

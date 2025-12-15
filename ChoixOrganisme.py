@@ -14,6 +14,7 @@ from PySide6.QtCore import Qt
 from PySide6.QtGui import QPixmap
 import json
 from FenetrePrincipale import Fenetre
+from utils import get_repertoire_racine
 
 class ChoixOrganisme(QWidget):
     """Choisir l'organisme - Parlement - École - Entreprise"""
@@ -75,9 +76,9 @@ class ChoixOrganisme(QWidget):
 
         # Logo centré
         labelLogo = QLabel()
-        dossier_projet = os.path.dirname(os.path.abspath(__file__))
-        cheminIcone = os.path.join(dossier_projet, "fichiers", "logos", "logoMemoVue.png")
-        pixmap = QPixmap(cheminIcone)
+        self.repertoire_racine = get_repertoire_racine() # voir fichier utils.py
+        chemin_icone = os.path.join(self.repertoire_racine, "fichiers", "logos", "logoMemoVue.png")
+        pixmap = QPixmap(chemin_icone)
         if not pixmap.isNull():
             pixmap = pixmap.scaledToWidth(100, Qt.SmoothTransformation)
             labelLogo.setPixmap(pixmap)
