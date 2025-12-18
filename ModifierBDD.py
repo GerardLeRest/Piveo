@@ -5,25 +5,27 @@
 Manipulation de la Base de Données
 """
 
-import sqlite3
+import sqlite3, os
+from utils import get_repertoire_racine
 
 class ModifierBDD:
     """Manipulation de la BDD"""
     def __init__(self, config, cheminFichier):
-        self.config = config  # configuration de l'interface - json
+        self.config = config
         self.cheminFichier = cheminFichier
-        self.conn = sqlite3.connect(self.cheminFichier)
+        # chemin de la base de donnée
+        base_dir = get_repertoire_racine()
+        chemin_bdd = os.path.join(base_dir, cheminFichier)
+        # connexion à la BDD
+        self.conn = sqlite3.connect(chemin_bdd)
         self.curs = self.conn.cursor()
         self.curs.execute("PRAGMA foreign_keys=on;")
-
-        self.listesPersonnes = []  # Toutes les personnes de la BDD
-
+        self.listesPersonnes = []
         self.chargerPersonnes()
 
     def chargerPersonnes(self):
         """Charge toutes les personnes depuis la BDD"""
         self.listesPersonnes.clear()
-
         self.curs.execute('''
             SELECT 
                 p.prenom, 
@@ -37,7 +39,6 @@ class ModifierBDD:
             LEFT JOIN specialites s ON s.id = ps.id_specialite
             GROUP BY p.id
         ''')
-
         # sepcialitesStr correspond à GROUP_CONCAT(s.specialite, ', ')
         for prenom, nom, structure, specialitesStr, photo in self.curs.fetchall():
             # listeSpécialites = ["CAM","THE"] par exemple
@@ -54,7 +55,7 @@ class ModifierBDD:
         """Retourne les personnes d’une structure spécifique"""
         listeFiltree = [
             personne for personne in self.listesPersonnes # parcourir une liste
-            if personne[2] == structureNom # retourner dans la miste, personnes si on a la condition
+            if personne[2] == structureNom # retourner dans la liste, personnes si on a la condition
         ]
         return listeFiltree
         # OU
@@ -79,4 +80,3 @@ if __name__ == "__main__":
     }
     modifier_bdd = ModifierBDD(config, config["BaseDonnees"])
     print(modifier_bdd.listerStructures())
-

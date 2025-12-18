@@ -1,22 +1,24 @@
-# utils.py
-import sys
+import os, sys
+
 import os
-from pathlib import Path
+import sys
 
-
-def get_repertoire_racine() -> Path:
+def get_repertoire_racine() -> str:
     """
-    Retourne le répertoire racine de l'application
-    (Python normal, PyInstaller, AppImage)
+    Retourne le répertoire racine de l'application.
+
+    - Linux AppImage : dossier contenant l'AppImage
+    - Windows exe    : dossier contenant le .exe
+    - Python (dev)   : dossier du fichier courant
     """
+    # Linux AppImage
+    appimage = os.environ.get("APPIMAGE")
+    if appimage:
+        return os.path.dirname(os.path.abspath(appimage))
 
-    # PyInstaller
-    if hasattr(sys, "_MEIPASS"):
-        return Path(sys._MEIPASS)
+    # Windows exe (PyInstaller, cx_Freeze, etc.)
+    if getattr(sys, "frozen", False):
+        return os.path.dirname(os.path.abspath(sys.executable))
 
-    # AppImage
-    if "APPDIR" in os.environ:
-        return Path(os.environ["APPDIR"])
-
-    # Python normal
-    return Path(__file__).resolve().parent
+    # Python (dev)
+    return os.path.dirname(os.path.abspath(__file__))

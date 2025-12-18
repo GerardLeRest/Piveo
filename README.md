@@ -38,11 +38,11 @@ Le programme utilise:
 - des fichiers d'initialisation CSV.
 
 Trois organismes sont fournis par défaut (Établissement scolaire, Parlement, Entreprise), mais il est possible d’ajouter un organisme personnalisé (ex. club de sport) en créant sa propre base, ses images et ses fichiers CSV.  
-Le choix de l’organisme se fait au lancement, via **MemoVue.pyw**.
+Le choix de l’organisme se fait au lancement, via **Piveo.pyw**.
 
 ## Vidéo
 
-[Vidéo de présentation de MémoVue](https://youtu.be/upmGYy93n2w)
+[Vidéo de présentation de Piveo](https://youtu.be/upmGYy93n2w)
 
 ## Installation
 
@@ -51,7 +51,7 @@ Le choix de l’organisme se fait au lancement, via **MemoVue.pyw**.
 1. **Cloner le dépôt**  
    
    ```bash
-   git clone https://github.com/GerardLeRest/MemoVue
+   git clone https://github.com/GerardLeRest/Piveo
    cd Fenetre
    ```
 
@@ -72,39 +72,39 @@ Le choix de l’organisme se fait au lancement, via **MemoVue.pyw**.
 
 ### Windows
 
-- Aller sur https://github.com/GerardLeRest/MemoVue/releases/tag/v1.0.0 
-- Sélectionner et télécharger "MemoVueSetup-1.0.0.exe"  
+- Aller sur https://github.com/GerardLeRest/Piveo/releases/
+- Sélectionner et télécharger "PiveoSetup-1.1.1.exe"  
 - Suivre les instructions et installer-le sur votre poste Windows.
 - Lancer le logiciel depuis les programmes ou depuis le Bureau
 
 ### GNU/Linux
 
-- Aller sur https://github.com/GerardLeRest/MemoVue/releases/tag/v1.0.0
+- Aller sur https://github.com/GerardLeRest/Piveo/releases/
 
-- Sélectionner et télécharger "MemoVue_1.0.0_x86_64.AppImage" ainsi que le dossier zip "fichiers". 
+- Sélectionner et télécharger "Piveo_1.1.1_x86_64.AppImage" ainsi que le dossier zip "fichiers". 
 
 - Décompressez "fichiers"
 
-- Créer un dossier ~/MemoVue_data
+- Créer un dossier ~/Piveo_data
 
-- Y mettre les six fichiers et "MemoVue_1.0.0_x86_64.AppImage"
+- Y mettre les six fichiers et "Piveo_1.0.0_x86_64.AppImage"
 
 - se déplacer dans le dossier
   
   ```bash
-  cd  ~/MemoVue_data~
+  cd  ~/Piveo_data~
   ```
   
   Rendre le fichier exécutable
   
   ```bash
-  chmod +x MemoVue_1.0.0_x86_64.AppImage
+  chmod +x Piveo_1.1.1_x86_64.AppImage
   ```
   
   lancer le logiciel
   
   ```bash
-  ./MemoVue_1.0.0_x86_64.AppImage
+  ./Piveo_1.0.0_x86_64.AppImage
   ```
   
   Installer si vous le souhaitez, Alacarte qui permet d'intégrer votre logiciel au menu très facilement.
@@ -121,8 +121,8 @@ Le choix de l’organisme se fait au lancement, via **MemoVue.pyw**.
 
 ## Liens
 
-- [Site internet](https://gerardlerest.github.io/memovue/)  
-- [Dépôt GitHub](https://github.com/GerardLeRest/MemoVue)
+- [Site internet](https://gerardlerest.github.io/Piveo/)  
+- [Dépôt GitHub](https://github.com/GerardLeRest/Piveo)
 
 ## Licence & photos
 

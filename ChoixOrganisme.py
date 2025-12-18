@@ -25,7 +25,7 @@ class ChoixOrganisme(QWidget):
 
     def interface(self) -> None:
         """création de l'interface"""
-        self.setWindowTitle("MemoVue")
+        self.setWindowTitle("Piveo")
         self.setStyleSheet("background-color: white;")  # fond blanc propre
         layout = QVBoxLayout() # layout général
         layout.setContentsMargins(20, 20, 20, 20)  # marges internes propres
@@ -70,14 +70,14 @@ class ChoixOrganisme(QWidget):
             }
         """)
         layout.addWidget(bouton, alignment=Qt.AlignCenter)
-        bouton.clicked.connect(self.lancerMemoVue)
+        bouton.clicked.connect(self.lancerPiveo)
 
         layout.addSpacing(15)
 
         # Logo centré
         labelLogo = QLabel()
         self.repertoire_racine = get_repertoire_racine() # voir fichier utils.py
-        chemin_icone = os.path.join(self.repertoire_racine, "fichiers", "logos", "logoMemoVue.png")
+        chemin_icone = os.path.join(self.repertoire_racine, "fichiers", "logos", "logoPiveo.png")
         pixmap = QPixmap(chemin_icone)
         if not pixmap.isNull():
             pixmap = pixmap.scaledToWidth(100, Qt.SmoothTransformation)
@@ -87,8 +87,8 @@ class ChoixOrganisme(QWidget):
 
         self.setLayout(layout)
 
-    def lancerMemoVue(self):
-        "lancement de la classe MemoVue"
+    def lancerPiveo(self):
+        "lancement de la classe Piveo"
         if self.radioEcole.isChecked():
             fichier = "ConfigEcole.json"
         elif self.radioEntreprise.isChecked():
@@ -104,6 +104,6 @@ class ChoixOrganisme(QWidget):
             print(f"Erreur lors du chargement du fichier : {e}")
             return
 
-        self.memoVue = Fenetre(config=config)
-        self.memoVue.show()
+        self.Piveo = Fenetre(config=config)
+        self.Piveo.show()
         self.close()

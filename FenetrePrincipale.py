@@ -6,13 +6,13 @@
 # du lycée
 """
 
-import os, random, copy, sys
+import os, random, copy
 from FrameGauche import *
 from FrameDroiteHaute import *
 from FrameDroiteBasse import *
 
 from PySide6.QtWidgets import (
-    QApplication, QMainWindow, QWidget,
+    QMainWindow, QWidget,
     QMenu, QMessageBox
 )
 from PySide6.QtGui import QPixmap, QAction
@@ -28,7 +28,7 @@ class Fenetre(QMainWindow):
         # configuration de l'application (Ecole-Entreprise-Parlement)
         # voir tableaux JSON 
         self.config= config
-        self.setWindowTitle("MemoVue - " + self.config["Organisme"])  # Titre de la fenêtre
+        self.setWindowTitle("Piveo - " + self.config["Organisme"])  # Titre de la fenêtre
         self.setMaximumSize(self.width(), self.height()) # empêchement d'aggranissement de la fenêtre
         
         # Création des 3 frames
@@ -362,9 +362,11 @@ class Fenetre(QMainWindow):
         texte = (
             "Ce logiciel est distribué sous licence GNU GPL version 3.\n\n"
             "Vous pouvez le redistribuer et/ou le modifier selon les termes de cette licence.\n\n"
-            "Plus d'informations : https://www.gnu.org/licenses/gpl-3.0.html"
+            "Plus d'informations : https://www.gnu.org/licenses/gpl-3.0.html \n\n"
+            "© 2025 Gérard Le Rest - ge.lerest@gmail.com"
+            
         )
-        QMessageBox.information(self, "Licence GPL-v3", texte)
+        QMessageBox.information(self, "GPL-v3", texte)
     
     def quitter(self):
         self.close()
