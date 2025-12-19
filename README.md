@@ -77,9 +77,9 @@ Le choix de l’organisme se fait au lancement, via **Piveo.pyw**.
 - Suivre les instructions et installer-le sur votre poste Windows.
 - Lancer le logiciel depuis les programmes ou depuis le Bureau
 
-## GNU/Linux
+### GNU/Linux
 
-### 1. Créer un dossier de travail
+#### 1. Créer un dossier de travail
 
 ```bash
 mkdir -p ~/Piveo
@@ -87,7 +87,7 @@ mkdir -p ~/Piveo
 
 ---
 
-### 2. Se placer dans le dossier de téléchargement
+#### 2. Se placer dans le dossier de téléchargement
 
 ```bash
 cd ~/Téléchargements
@@ -95,7 +95,7 @@ cd ~/Téléchargements
 
 ---
 
-### 3. Télécharger l’archive AppImage
+#### 3. Télécharger l’archive AppImage
 
 Rendez-vous sur la page des releases GitHub :  
 https://github.com/GerardLeRest/Piveo/releases
@@ -108,7 +108,7 @@ Piveo-AppImage-v2.1.0.tar.xz
 
 ---
 
-### 4. Décompresser l’archive
+#### 4. Décompresser l’archive
 
 ```bash
 tar -xf Piveo-AppImage-v2.1.0.tar.xz
@@ -116,7 +116,7 @@ tar -xf Piveo-AppImage-v2.1.0.tar.xz
 
 ---
 
-### 5. Copier les fichiers dans le dossier Piveo
+#### 5. Copier les fichiers dans le dossier Piveo
 
 ```bash
 cp -r ~/Téléchargements/Piveo-AppImage-v2.1.0/. ~/Piveo
@@ -124,8 +124,8 @@ cp -r ~/Téléchargements/Piveo-AppImage-v2.1.0/. ~/Piveo
 
 ---
 
-### 6. Vérifier le contenu
-
+#### 6. Vérifier le contenu
+0
 ```bash
 ls ~/Piveo
 ```
@@ -137,7 +137,7 @@ Le dossier doit contenir :
 
 ---
 
-### 7. Rendre l’AppImage exécutable
+#### 7. Rendre l’AppImage exécutable
 
 ```bash
 chmod +x ~/Piveo/Piveo_2.1.0_x86_64.AppImage
@@ -145,7 +145,7 @@ chmod +x ~/Piveo/Piveo_2.1.0_x86_64.AppImage
 
 ---
 
-### 8. Lancer le logiciel
+#### 8. Lancer le logiciel
 
 ```bash
 cd ~/Piveo
