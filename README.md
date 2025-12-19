@@ -77,41 +77,90 @@ Le choix de l’organisme se fait au lancement, via **Piveo.pyw**.
 - Suivre les instructions et installer-le sur votre poste Windows.
 - Lancer le logiciel depuis les programmes ou depuis le Bureau
 
-### GNU/Linux
+## GNU/Linux
 
-- Aller sur https://github.com/GerardLeRest/Piveo/releases/
+### 1. Créer un dossier de travail
 
-- Sélectionner et télécharger "Piveo_1.1.1_x86_64.AppImage" ainsi que le dossier zip "fichiers". 
+```bash
+mkdir -p ~/Piveo
+```
 
-- Décompressez "fichiers"
+---
 
-- Créer un dossier ~/Piveo_data
+### 2. Se placer dans le dossier de téléchargement
 
-- Y mettre les six fichiers et "Piveo_1.0.0_x86_64.AppImage"
+```bash
+cd ~/Téléchargements
+```
 
-- se déplacer dans le dossier
-  
-  ```bash
-  cd  ~/Piveo_data~
-  ```
-  
-  Rendre le fichier exécutable
-  
-  ```bash
-  chmod +x Piveo_1.1.1_x86_64.AppImage
-  ```
-  
-  lancer le logiciel
-  
-  ```bash
-  ./Piveo_1.0.0_x86_64.AppImage
-  ```
-  
-  Installer si vous le souhaitez, Alacarte qui permet d'intégrer votre logiciel au menu très facilement.
-  
-  ```bash
-  sudo apt install alacarte
-  ```
+---
+
+### 3. Télécharger l’archive AppImage
+
+Rendez-vous sur la page des releases GitHub :  
+https://github.com/GerardLeRest/Piveo/releases
+
+Téléchargez la **dernière archive AppImage**, par exemple :
+
+```
+Piveo-AppImage-v2.1.0.tar.xz
+```
+
+---
+
+### 4. Décompresser l’archive
+
+```bash
+tar -xf Piveo-AppImage-v2.1.0.tar.xz
+```
+
+---
+
+### 5. Copier les fichiers dans le dossier Piveo
+
+```bash
+cp -r ~/Téléchargements/Piveo-AppImage-v2.1.0/. ~/Piveo
+```
+
+---
+
+### 6. Vérifier le contenu
+
+```bash
+ls ~/Piveo
+```
+
+Le dossier doit contenir :
+- l’AppImage **Piveo_2.1.0_x86_64.AppImage**
+- **six fichiers**
+- le dossier **`fichiers`**
+
+---
+
+### 7. Rendre l’AppImage exécutable
+
+```bash
+chmod +x ~/Piveo/Piveo_2.1.0_x86_64.AppImage
+```
+
+---
+
+### 8. Lancer le logiciel
+
+```bash
+cd ~/Piveo
+./Piveo_2.1.0_x86_64.AppImage
+```
+
+---
+
+## (Optionnel) Intégration au menu du système
+
+Vous pouvez installer **Alacarte**, qui permet d’ajouter facilement Piveo au menu des applications :
+
+```bash
+sudo apt install alacarte
+```
 
 ## Remarques
 
