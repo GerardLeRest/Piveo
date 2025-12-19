@@ -101,17 +101,14 @@ Rendez-vous sur la page des releases GitHub :
 https://github.com/GerardLeRest/Piveo/releases
 
 Téléchargez la **dernière archive AppImage**, par exemple :
-
-```
-Piveo-AppImage-v2.1.0.tar.xz
-```
+Piveo-AppImage-v1.2.0.tar.xz
 
 ---
 
 #### 4. Décompresser l’archive
 
 ```bash
-tar -xf Piveo-AppImage-v2.1.0.tar.xz
+tar -xf Piveo-AppImage-v1.2.0.tar.xz
 ```
 
 ---
@@ -119,19 +116,19 @@ tar -xf Piveo-AppImage-v2.1.0.tar.xz
 #### 5. Copier les fichiers dans le dossier Piveo
 
 ```bash
-cp -r ~/Téléchargements/Piveo-AppImage-v2.1.0/. ~/Piveo
+cp -r ~/Téléchargements/Piveo-AppImage-v1.2.0/. ~/Piveo
 ```
 
 ---
 
 #### 6. Vérifier le contenu
-0
+
 ```bash
 ls ~/Piveo
 ```
 
 Le dossier doit contenir :
-- l’AppImage **Piveo_2.1.0_x86_64.AppImage**
+- l’AppImage **Piveo_1.2.0_x86_64.AppImage**
 - **six fichiers**
 - le dossier **`fichiers`**
 
@@ -139,8 +136,13 @@ Le dossier doit contenir :
 
 #### 7. Rendre l’AppImage exécutable
 
+Se rendre dans le dossier:
 ```bash
-chmod +x ~/Piveo/Piveo_2.1.0_x86_64.AppImage
+cd ~/Piveo
+```
+
+```bash
+chmod +x ~/Piveo/Piveo_1.2.0_x86_64.AppImage
 ```
 
 ---
@@ -149,7 +151,7 @@ chmod +x ~/Piveo/Piveo_2.1.0_x86_64.AppImage
 
 ```bash
 cd ~/Piveo
-./Piveo_2.1.0_x86_64.AppImage
+./Piveo_1.2.0_x86_64.AppImage
 ```
 
 ---
