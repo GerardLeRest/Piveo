@@ -136,11 +136,6 @@ Le dossier doit contenir :
 
 #### 7. Rendre l’AppImage exécutable
 
-Se rendre dans le dossier:
-```bash
-cd ~/Piveo
-```
-
 ```bash
 chmod +x ~/Piveo/Piveo_1.2.0_x86_64.AppImage
 ```
@@ -148,9 +143,12 @@ chmod +x ~/Piveo/Piveo_1.2.0_x86_64.AppImage
 ---
 
 #### 8. Lancer le logiciel
-
+Se rendre dans le dossier ~/Piveo:
 ```bash
 cd ~/Piveo
+```
+Lancer Piveo:
+```bash
 ./Piveo_1.2.0_x86_64.AppImage
 ```
 
