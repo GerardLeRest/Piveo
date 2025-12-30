@@ -6,7 +6,7 @@
 # du lycée
 """
 
-import os, random, copy, json
+import os, random, copy, json, locale
 from pathlib import Path
 from FrameGauche import *
 from FrameDroiteHaute import *
@@ -55,9 +55,20 @@ class Fenetre(QMainWindow):
         # langue de l'interface
         self.langue = " "
         self.langue = self.lireLangue()
-        print ("langue" + ":" + self.langue)
         self.show()
         self. menus()
+        # initialisation de la langue - 1 fois au démarrage
+        BASE_DIR = Path(__file__).resolve().parent
+        LOCALE_DIR = BASE_DIR / "locales"
+        langue = self.lireLangue()
+        locale.setlocale(locale.LC_ALL, "")
+        gettext.translation(
+            "messages",
+            localedir=LOCALE_DIR,
+            languages=[langue],
+            fallback=True,
+        ).install()
+
 
     def menus(self) -> None:
         # barre de menus
@@ -102,7 +113,7 @@ class Fenetre(QMainWindow):
         menuPrincipal.addAction(actionQuitter)
         # lier le menu menuPrinipal au menuBar
         menuBar.addMenu(menuPrincipal)
-
+        
     def lireLangue(self) -> str:
         """Récupérer la langue enregistrée (fr par défaut)."""
         with open(configurationLangue, "r", encoding="utf-8") as f:
@@ -116,29 +127,28 @@ class Fenetre(QMainWindow):
             json.dump(config_langue, f, indent=4, ensure_ascii=False)
 
     def Brezhoneg(self)->None:
-        print ("Brezhoneg")
         self.ecritureLangue("br")
         # sélection du radio
         self.changerOrganisme()
 
     def English(self)->None:
-        print ("English")
         self.ecritureLangue("en")
         # redémarrage
         self.changerOrganisme()
 
     def Francais(self)->None:
-        print ("French")
         self.ecritureLangue("fr")
         # redémarrage
         self.changerOrganisme()
 
     def changerOrganisme(self):
-        """Changer d'organisme"""
+        "Redémarrer"
         self.close()
         from ChoixOrganisme import ChoixOrganisme
         self.boiteAccueil = ChoixOrganisme()
         self.boiteAccueil.show()
+        BASE_DIR = Path(__file__).resolve().parent
+        LOCALE_DIR = BASE_DIR / "locales"
                 
     def configurer(self) -> None:
         """ configurer l'application"""
