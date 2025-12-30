@@ -1,32 +1,28 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-"""
-Point d'entrée du programme Piveo
-"""
+import sys, json, locale, gettext
+from pathlib import Path
 
-import sys
-import os
-import locale
-import gettext
+BASE_DIR = Path(__file__).resolve().parent
+LOCALE_DIR = (BASE_DIR / "locales").resolve()
 
-# ------------------------------------------------------------
-# Initialisation gettext (Piveo) - 1suel fois dans les classes
-# ------------------------------------------------------------
+with open(BASE_DIR / "fichiers" / "configurationLangue.json", "r", encoding="utf-8") as f:
+    langue = json.load(f).get("langueSelectionnee", "fr")
+
 locale.setlocale(locale.LC_ALL, "")
+gettext.translation(
+    "messages",
+    localedir=LOCALE_DIR,
+    languages=[langue],
+    fallback=False,
+).install()
 
-localedir = os.path.join(os.path.dirname(__file__), "locale")
+# _("Menu")  # TEST
 
-gettext.bindtextdomain("piveo", localedir)
-gettext.textdomain("piveo")
-_ = gettext.gettext
-
-# -----------------------------
-# Qt
-# -----------------------------
+# ⬇️ IMPORTS UI APRÈS gettext
 from PySide6.QtWidgets import QApplication
 from ChoixOrganisme import ChoixOrganisme
-
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

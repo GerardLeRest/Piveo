@@ -9,7 +9,7 @@ l'établissement
 
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QGridLayout, QLabel, QLineEdit, QHBoxLayout, QPushButton, QApplication, QSpacerItem, QSizePolicy, QFrame
 from PySide6.QtGui import QPixmap
-from gettext import gettext as _
+from builtins import _
 import os, sys
 
 repertoireRacine=os.path.dirname(os.path.abspath(__file__)) # répetoire du fichier pyw

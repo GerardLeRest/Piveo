@@ -11,14 +11,14 @@ from pathlib import Path
 from FrameGauche import *
 from FrameDroiteHaute import *
 from FrameDroiteBasse import *
-from gettext import gettext as _
+from builtins import _
 from PySide6.QtWidgets import (
     QMainWindow, QWidget,
     QMenu, QMessageBox
 )
 from PySide6.QtGui import QPixmap, QAction, QActionGroup
 from utils_i18n import ui_value
-
+from builtins import _
 repertoire_racine = Path(__file__).resolve().parent
 configurationLangue = repertoire_racine / "fichiers" / "configurationLangue.json"
 
@@ -52,24 +52,9 @@ class Fenetre(QMainWindow):
         self.FrameDrHa.boutSuite.clicked.connect(self.AllerALaSuite)
         self.FrameDrHa.prenomEntry.returnPressed.connect(self.validerRepNom)
         self.FrameDrHa.nomEntry.returnPressed.connect(self.verifierRechercher)
-        # langue de l'interface
-        self.langue = " "
-        self.langue = self.lireLangue()
         self.show()
         self. menus()
-        # initialisation de la langue - 1 fois au démarrage
-        BASE_DIR = Path(__file__).resolve().parent
-        LOCALE_DIR = BASE_DIR / "locales"
-        langue = self.lireLangue()
-        locale.setlocale(locale.LC_ALL, "")
-        gettext.translation(
-            "messages",
-            localedir=LOCALE_DIR,
-            languages=[langue],
-            fallback=True,
-        ).install()
-
-
+        
     def menus(self) -> None:
         # barre de menus
         menuBar = self.menuBar()
@@ -86,13 +71,14 @@ class Fenetre(QMainWindow):
         self.actionEnglish.triggered.connect(self.English)
         self.actionFrancais = QAction("Français", self, checkable=True)
         self.actionFrancais.triggered.connect(self.Francais)
-        # action préselectionnée des radios-
-        if self.langue == "br":
+        with open(configurationLangue, "r", encoding="utf-8") as f:
+            langue = json.load(f).get("langueSelectionnee", "fr")
+        if langue == "br":
             self.actionBrezhoneg.setChecked(True)
-        elif self.langue == "en":
+        elif langue == "en":
             self.actionEnglish.setChecked(True)
         else:
-            self.actionFrancais.setChecked(True)
+            self.actionFrancais.setChecked(True)    
         # lier acions au menu et ay groupe langue
         for action in (self.actionBrezhoneg, self.actionEnglish, self.actionFrancais):
             groupe_langue.addAction(action)
@@ -114,12 +100,6 @@ class Fenetre(QMainWindow):
         # lier le menu menuPrinipal au menuBar
         menuBar.addMenu(menuPrincipal)
         
-    def lireLangue(self) -> str:
-        """Récupérer la langue enregistrée (fr par défaut)."""
-        with open(configurationLangue, "r", encoding="utf-8") as f:
-            config_langue = json.load(f)
-        return config_langue.get("langueSelectionnee", "fr")
-
     def ecritureLangue(self, langue: str) -> None:
         """Écrire la langue sélectionnée dans le fichier."""
         config_langue = {"langueSelectionnee": langue}
@@ -144,11 +124,10 @@ class Fenetre(QMainWindow):
     def changerOrganisme(self):
         "Redémarrer"
         self.close()
-        from ChoixOrganisme import ChoixOrganisme
-        self.boiteAccueil = ChoixOrganisme()
-        self.boiteAccueil.show()
-        BASE_DIR = Path(__file__).resolve().parent
-        LOCALE_DIR = BASE_DIR / "locales"
+        # from ChoixOrganisme import ChoixOrganisme
+        # self.boiteAccueil = ChoixOrganisme()
+        # self.boiteAccueil.show()
+        
                 
     def configurer(self) -> None:
         """ configurer l'application"""

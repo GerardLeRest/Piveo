@@ -11,7 +11,7 @@ from PySide6.QtWidgets import QWidget, QVBoxLayout, QGridLayout, QLabel, QHBoxLa
 from PySide6.QtGui import QPixmap, QIcon
 from PySide6.QtCore import QSize, Qt
 from ModifierBDD import  ModifierBDD
-from gettext import gettext as _
+from builtins import _
 from utils import get_repertoire_racine
 from utils_i18n import ui_value
 
@@ -33,8 +33,6 @@ class FrameGauche (QWidget):
         self.nbrePers=0 # nbre élèves
         self.resize(150, 100) # définir une taille fixe pour la fenêtre
         self.repertoire_racine = "" # repertoire du projet
-
-       
         # Partie haute du layout
         # QGridLayout
         # prenom
@@ -52,10 +50,8 @@ class FrameGauche (QWidget):
         layoutGrille.addWidget(QLabel(_("Nom :")), 1, 0, alignment=Qt.AlignRight)
         # attachement à layoutGauche
         layoutGauche.addLayout(layoutGrille)
-        
         # Layout principal vertical
         layoutMilieu = QVBoxLayout()
-
         # Création du QLabel de l'image
         self.labelImage = QLabel()
         self.labelImage.setFixedSize(128, 128)
@@ -99,7 +95,6 @@ class FrameGauche (QWidget):
         layoutMilieu.addWidget(photoWidget)
         # Ajoute à layoutGauche (comme avant)
         layoutGauche.addLayout(layoutMilieu)
-		
 		# layout bas
         # affichage des élèves restants
         layoutBas = QVBoxLayout()

@@ -11,7 +11,7 @@ from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QRadioButton, Q
 from ModifierBDD import ModifierBDD
 from PySide6.QtWidgets import QApplication
 from utils_i18n import ui_value
-from gettext import gettext as _
+from builtins import _
 import sys
 
 class FrameDroiteBasse (QWidget):

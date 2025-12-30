@@ -12,7 +12,7 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QPixmap
-from gettext import gettext as _
+from builtins import _
 from FenetrePrincipale import Fenetre
 from utils import get_repertoire_racine
 import json, os

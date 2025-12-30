@@ -173,6 +173,10 @@ msgstr "Anv :"
 msgid "rang / effectif "
 msgstr "renk / hollad "
 
+#: utils_i18n.py:106
+msgid "Classe"
+msgstr "Klas"
+
 #: utils_i18n.py:5
 msgid "Parti"
 msgstr "Strollad"
