@@ -5,16 +5,17 @@
     Fenêtre d'accueil - choix de l'organisme:
     Ecole, Entreprise, Parlement
 """
-import os
+
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QLabel, QRadioButton,
     QPushButton
 )
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QPixmap
-import json
+from gettext import gettext as _
 from FenetrePrincipale import Fenetre
 from utils import get_repertoire_racine
+import json, os
 
 class ChoixOrganisme(QWidget):
     """Choisir l'organisme - Parlement - École - Entreprise"""
@@ -25,13 +26,13 @@ class ChoixOrganisme(QWidget):
 
     def interface(self) -> None:
         """création de l'interface"""
-        self.setWindowTitle("Piveo")
+        self.setWindowTitle(_("Piveo"))
         self.setStyleSheet("background-color: white;")  # fond blanc propre
         layout = QVBoxLayout() # layout général
         layout.setContentsMargins(20, 20, 20, 20)  # marges internes propres
 
         # Titre centré
-        label = QLabel("Mode de fonctionnement")
+        label = QLabel(_("mode de fonctionnement"))
         label.setStyleSheet("""
             color: #2F4F4F;
             font-weight: bold;
@@ -43,9 +44,9 @@ class ChoixOrganisme(QWidget):
         layout.addSpacing(10)
 
         # Boutons radios
-        self.radioEcole = QRadioButton("Ecole")
-        self.radioEntreprise = QRadioButton("Entreprise")
-        self.radioParlement = QRadioButton("Parlement")
+        self.radioEcole = QRadioButton(_("Ecole"))
+        self.radioEntreprise = QRadioButton(_("Entreprise"))
+        self.radioParlement = QRadioButton(_("Parlement"))
         self.radioEcole.setChecked(True) # radio s&électionné par défaut
 
         for radio in [self.radioEcole, self.radioEntreprise, self.radioParlement]:
@@ -55,7 +56,7 @@ class ChoixOrganisme(QWidget):
         layout.addSpacing(15)
 
         # Bouton OK centré et stylisé
-        bouton = QPushButton("OK")
+        bouton = QPushButton(_("OK"))
         bouton.setFixedWidth(80)
         bouton.setStyleSheet("""
             QPushButton {
@@ -103,7 +104,6 @@ class ChoixOrganisme(QWidget):
         except Exception as e:
             print(f"Erreur lors du chargement du fichier : {e}")
             return
-
         self.Piveo = Fenetre(config=config)
         self.Piveo.show()
         self.close()

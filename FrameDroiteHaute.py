@@ -9,6 +9,7 @@ l'établissement
 
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QGridLayout, QLabel, QLineEdit, QHBoxLayout, QPushButton, QApplication, QSpacerItem, QSizePolicy, QFrame
 from PySide6.QtGui import QPixmap
+from gettext import gettext as _
 import os, sys
 
 repertoireRacine=os.path.dirname(os.path.abspath(__file__)) # répetoire du fichier pyw
@@ -22,13 +23,12 @@ class FrameDroiteHaute(QWidget):
         self.config = config # configuration de l'interface - json
         # layout de la classe
         layoutDroitHaut = QVBoxLayout()        
-
         # zone de saisie - GrdGidLayout - partie haue
         # prenom
         layoutGrille = QGridLayout()
-        self.labelPrenom = QLabel("Prénom")
+        self.labelPrenom = QLabel(_("Prénom"))
         layoutGrille.addWidget(self.labelPrenom,0,0)
-        self.prenomEntry = QLineEdit()  # Removed undefined widget
+        self.prenomEntry = QLineEdit()  
         self.prenomEntry.setStyleSheet("""
             QLineEdit {
                 background-color: white;
@@ -37,12 +37,12 @@ class FrameDroiteHaute(QWidget):
                 padding: 4px 8px;
             }
         """)
-        self.prenomEntry.setPlaceholderText("Indiquez votre prénom")
+        self.prenomEntry.setPlaceholderText(_("Indiquez votre prénom"))
         layoutGrille.addWidget(self.prenomEntry,0, 1)
         # nom
-        self.labelNom = QLabel("Nom")
+        self.labelNom = QLabel(_("Nom"))
         layoutGrille.addWidget(self.labelNom,1,0)
-        self.nomEntry = QLineEdit()  # Removed undefined widget
+        self.nomEntry = QLineEdit()  
         self.nomEntry.setStyleSheet("""
             QLineEdit {
                 background-color: white;
@@ -51,7 +51,7 @@ class FrameDroiteHaute(QWidget):
                 padding: 4px 8px;
             }
         """)
-        self.nomEntry.setPlaceholderText("Indiquez votre nom")
+        self.nomEntry.setPlaceholderText(_("Indiquez votre nom"))
         layoutGrille.addWidget(self.nomEntry,1, 1)
         layoutDroitHaut.addLayout(layoutGrille)
         layoutDroitHaut.addSpacing(5)
@@ -108,15 +108,15 @@ class FrameDroiteHaute(QWidget):
         # boutons
         layoutBoutons = QHBoxLayout()
         # bouton valider
-        self.boutVal = QPushButton ("Valider", self)
+        self.boutVal = QPushButton (_("Valider"), self)
         self.boutVal.setStyleSheet(validerStyle)
         layoutBoutons.addWidget(self.boutVal)
         # bouton effacer
-        self.boutEff = QPushButton ("Effacer", self)
+        self.boutEff = QPushButton (_("Effacer"), self)
         self.boutEff.setStyleSheet(effaceBoutonStyle)
         layoutBoutons.addWidget(self.boutEff)
         # bouton Suite
-        self.boutSuite = QPushButton ("Suite", self)
+        self.boutSuite = QPushButton (_("Suite"), self)
         self.boutSuite.setStyleSheet(suiteBoutonStyle)
         layoutBoutons.addWidget(self.boutSuite)
         # espacement au dessus des boutons
@@ -139,7 +139,7 @@ class FrameDroiteHaute(QWidget):
         # espace entre l'image et le compteur de bonnes réponses
         layoutImages.addStretch()  # ← ajoute un espace flexible
         # affichage des bonnes réponses
-        self.nbreRep=QLabel("0/0") 
+        self.nbreRep = QLabel(_("0/0")) 
         self.nbreRep.setStyleSheet("color: grey;font-size: 30px;")
         self.nbreRepExactes=0 
         layoutImages.addWidget(self.nbreRep)
@@ -174,7 +174,7 @@ class FrameDroiteHaute(QWidget):
         self.nbreRep.setStyleSheet("color: grey;font-size: 30px") #nbre bonnes reponses en gris
         self.nbreRepExactes=0  # nbre de réponses exactes
         # maj nbrebonnes réponses
-        self.nbreRep.setText(str(self.nbreRepExactes)+os.sep+"0")    
+        self.nbreRep.setText(f"{self.nbreRepExactes}/0")   
     
     def desFrameDrHa(self) -> None:
         """désactiver des boutons et les entry de la frameDB"""     
@@ -214,7 +214,8 @@ class FrameDroiteHaute(QWidget):
         
 # ----------------------------------------------------
 if __name__ == "__main__":
-
+    import gettext
+    gettext.install("piveo")
     app = QApplication(sys.argv)
     fenetre = FrameDroiteHaute(None)
     fenetre.prenomEntry.setEnabled(True)

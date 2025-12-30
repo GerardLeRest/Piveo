@@ -10,6 +10,8 @@
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QRadioButton, QPushButton, QGridLayout, QLabel, QComboBox, QCheckBox, QButtonGroup
 from ModifierBDD import ModifierBDD
 from PySide6.QtWidgets import QApplication
+from utils_i18n import ui_value
+from gettext import gettext as _
 import sys
 
 class FrameDroiteBasse (QWidget):
@@ -29,10 +31,10 @@ class FrameDroiteBasse (QWidget):
         layoutBasDroit.setSpacing(10)
         layoutBoutonsRadiosHaut = QHBoxLayout()
         # boutons radio des modes
-        self.boutonRadioHaut1 = QRadioButton("Apprentissage")
-        self.boutonRadioHaut2 = QRadioButton("Test mental")
-        self.boutonRadioHaut3 = QRadioButton("Test ecrit")
-        self.boutonRadioHaut4 = QRadioButton("Rechercher")
+        self.boutonRadioHaut1 = QRadioButton(_("Apprentissage"))
+        self.boutonRadioHaut2 = QRadioButton(_("Test mental"))
+        self.boutonRadioHaut3 = QRadioButton(_("Test ecrit"))
+        self.boutonRadioHaut4 = QRadioButton(_("Rechercher"))
         # regroupement
         self.groupeHaut = QButtonGroup()
         self.groupeHaut.addButton(self.boutonRadioHaut1)
@@ -53,32 +55,30 @@ class FrameDroiteBasse (QWidget):
         layoutGrille = QGridLayout()
         layoutGrille.setSpacing(10)
          # labels)
-        layoutGrille.addWidget(QLabel(self.config["Structure"]), 0,0)
-        layoutGrille.addWidget(QLabel(self.config["Specialite"]),0,1)
+        layoutGrille.addWidget(QLabel(ui_value(self.config["Structure"])), 0, 0)
+        layoutGrille.addWidget(QLabel(ui_value(self.config["Specialite"])), 0, 1)
         ## ComboBox
         self.comboBoxGauche = QComboBox()
         self.comboBoxDroite = QComboBox()
         layoutGrille.addWidget(self.comboBoxGauche,1,0)
         layoutGrille.addWidget(self.comboBoxDroite,1,1)
         layoutBasDroit.addLayout(layoutGrille)
-
         # création de la liste des classes
         classesRangees = sorted(self.listeDesStructures())  # crée une nouvelle liste triée
-        self.comboBoxGauche.addItems(classesRangees)
+        classes_ui = [ui_value(c) for c in classesRangees]
+        self.comboBoxGauche.addItems(classes_ui)
         self.comboBoxGauche.currentTextChanged.connect(self.choisirStructureSpecialites)
-        
         # checkbutton Aléatoite
         layoutCheckBox = QHBoxLayout()
-        self.checkBox = QCheckBox("Aleatoire")
+        self.checkBox = QCheckBox(_("Aléatoire"))
         layoutCheckBox.addWidget(self.checkBox)
         layoutBasDroit.addLayout(layoutCheckBox)
-        
         # boutons radios avec/sans nom prénoms
         layoutBoutonsRadiosBas = QHBoxLayout()
         self.groupeBas = QButtonGroup()
-        self.boutonRadioBas1 = QRadioButton("Prenom+Nom")
-        self.boutonRadioBas2 = QRadioButton("Prenom")
-        self.boutonRadioBas3 = QRadioButton("Nom")
+        self.boutonRadioBas1 = QRadioButton(_("Prenom+Nom"))
+        self.boutonRadioBas2 = QRadioButton(_("Prenom"))
+        self.boutonRadioBas3 = QRadioButton(_("Nom"))
         # regroupement
         self.groupeBas.addButton(self.boutonRadioBas1)
         self.groupeBas.addButton(self.boutonRadioBas2)
@@ -109,7 +109,7 @@ class FrameDroiteBasse (QWidget):
             }
         """
         # Créer le bouton "Valider"
-        self.boutonVal = QPushButton("Valider")
+        self.boutonVal = QPushButton(_("Valider"))
         self.boutonVal.setFixedWidth(120)
         self.boutonVal.setStyleSheet(validerStyle)
         self.boutonVal.clicked.connect(self.configRechercher)
@@ -135,10 +135,13 @@ class FrameDroiteBasse (QWidget):
         """Renvoie la liste des structures de l'organisme"""
         structures = self.modif.listerStructures()
         if self.config["Organisme"] == "Ecole":
-            phrase = "- choisir une " + self.config["Structure"] +" -"
+            phrase = _("- choisir une %(structure)s -") % {
+                "structure": self.config["Structure"]
+                }
         else:
-            phrase = "-  choisir un " + self.config["Structure"]+" -"
-        structures.insert(0,phrase)
+            phrase = _("- choisir un %(structure)s -") % {
+                "structure": self.config["Structure"]
+                }
         return structures
 
     def configRechercher(self) -> None:
@@ -207,7 +210,8 @@ class FrameDroiteBasse (QWidget):
 # ----------------------------------------------------
 
 if __name__ == '__main__':
-   
+    import gettext
+    gettext.install("piveo")
     app = QApplication(sys.argv)
     config = {
     "Organisme": "Entreprise",

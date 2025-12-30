@@ -6,12 +6,14 @@ afficher la photo de l'élève sélecctionné
 et ses informations
 """
 
-import os
-from PySide6.QtWidgets import QWidget, QVBoxLayout, QLineEdit, QGridLayout, QLabel, QHBoxLayout, QPushButton, QSpacerItem, QSizePolicy
+import os, gettext
+from PySide6.QtWidgets import QWidget, QVBoxLayout, QGridLayout, QLabel, QHBoxLayout, QPushButton, QSpacerItem, QSizePolicy
 from PySide6.QtGui import QPixmap, QIcon
 from PySide6.QtCore import QSize, Qt
 from ModifierBDD import  ModifierBDD
+from gettext import gettext as _
 from utils import get_repertoire_racine
+from utils_i18n import ui_value
 
 repertoireRacine=os.path.dirname(os.path.abspath(__file__)) # répetoire du fichier pyw
 icones=["Gnome-go-first.png","Gnome-go-previous.png","Gnome-go-next.png","Gnome-go-last.png", ]
@@ -38,16 +40,16 @@ class FrameGauche (QWidget):
         # prenom
         layoutGrille = QGridLayout()
         self.prenom = QLabel("-")
-        self.prenom.setText("Prénom")
+        self.prenom.setText(_("Prénom"))
         self.prenom.setStyleSheet("color: #446069; font-weight: bold; font-size: 16px")
         layoutGrille.addWidget(self.prenom, 0, 1)
-        layoutGrille.addWidget(QLabel("Prénom :"), 0, 0, alignment=Qt.AlignRight)
+        layoutGrille.addWidget(QLabel(_("Prénom :")), 0, 0, alignment=Qt.AlignRight)
         # nom
         self.nom = QLabel()
-        self.nom.setText("Nom")
+        self.nom.setText(_("Nom"))
         self.nom.setStyleSheet("color: #446069; font-weight: bold; font-size: 16px")
         layoutGrille.addWidget(self.nom, 1, 1)
-        layoutGrille.addWidget(QLabel("Nom :"), 1, 0, alignment=Qt.AlignRight)
+        layoutGrille.addWidget(QLabel(_("Nom :")), 1, 0, alignment=Qt.AlignRight)
         # attachement à layoutGauche
         layoutGauche.addLayout(layoutGrille)
         
@@ -102,16 +104,16 @@ class FrameGauche (QWidget):
         # affichage des élèves restants
         layoutBas = QVBoxLayout()
         self.numOrdrePers=QLabel() # rang de la Personne
-        self.numOrdrePers.setText("rang/effectif ")
+        self.numOrdrePers.setText(_("rang / effectif "))
         layoutBas.addWidget(self.numOrdrePers, alignment=Qt.AlignCenter)
         # affichage de la structure 
         self.structure=QLabel() # label de la structure
-        self.structure.setText(config["Structure"])
+        self.structure.setText(ui_value(config["Structure"]))
         self.structure.setStyleSheet("color: #76aeba; font-weight: bold; font-size: 11pt;")
         layoutBas.addWidget(self.structure, alignment=Qt.AlignCenter)
         # affichage des options
         self.specialites = QLabel() # permet de changer le texte du label
-        self.specialites.setText(config["Specialite"])
+        self.specialites.setText(ui_value(config["Specialite"]))
         self.specialites.setStyleSheet("font-size: 10pt;")
         layoutBas.addWidget(self.specialites, alignment=Qt.AlignCenter)
         # attachement au layout gauche
@@ -183,14 +185,18 @@ class FrameGauche (QWidget):
         self.prenom.setText(self.listePersonnes[self.rang][0])
         self.nom.setText(self.listePersonnes[self.rang][1])
             
+    
     def majClasseOptions(self):
-        self.structure.setText(self.listePersonnes[self.rang][2])
-        # Options (colonne 3), sous forme de liste
+        # Structure (classe / département / parti)
+        structure_interne = self.listePersonnes[self.rang][2]
+        self.structure.setText(ui_value(structure_interne))
+
+        # Options (liste)
         options = self.listePersonnes[self.rang][3]
-        # transforme une liste d’options en chaîne de caractères lisible :
-        #['ESP2', 'THE'] devient "ESP2, THE"
-        texteOptions = "- ".join(options)
+        options_ui = [ui_value(opt) for opt in options] # affichage ui
+        texteOptions = " - ".join(options_ui)
         self.specialites.setText(texteOptions)
+
 
     def majnumOrdrePers(self) -> None:
         """mettre à jour le numéro d'ordre de l'élève"""
@@ -205,6 +211,8 @@ from PySide6.QtWidgets import QApplication
 
 if __name__ == '__main__':
     import sys
+    import gettext
+    gettext.install("piveo")
     app = QApplication(sys.argv)
     listePersonnes = [
         ['Sarah', 'Fernandez', '1S1', ['CAM', 'THE'], 'fichiers/photos/1S1/Fernandez_Sarah.jpg'],

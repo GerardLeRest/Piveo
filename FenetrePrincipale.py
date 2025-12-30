@@ -6,19 +6,22 @@
 # du lycée
 """
 
-import os, random, copy
+import os, random, copy, json
+from pathlib import Path
 from FrameGauche import *
 from FrameDroiteHaute import *
 from FrameDroiteBasse import *
-
+from gettext import gettext as _
 from PySide6.QtWidgets import (
     QMainWindow, QWidget,
     QMenu, QMessageBox
 )
-from PySide6.QtGui import QPixmap, QAction
-import sys
+from PySide6.QtGui import QPixmap, QAction, QActionGroup
+from utils_i18n import ui_value
 
-repertoireRacine = os.path.dirname(os.path.abspath(__file__)) # répetoire du fichier pyw
+repertoire_racine = Path(__file__).resolve().parent
+configurationLangue = repertoire_racine / "fichiers" / "configurationLangue.json"
+
 
 class Fenetre(QMainWindow):
     """ Créer l'interface graphique et lier les diffentes classes entre elles"""
@@ -28,25 +31,20 @@ class Fenetre(QMainWindow):
         # configuration de l'application (Ecole-Entreprise-Parlement)
         # voir tableaux JSON 
         self.config= config
-        self.setWindowTitle("Piveo - " + self.config["Organisme"])  # Titre de la fenêtre
+        self.setWindowTitle(_("Piveo - ") + ui_value(self.config["Organisme"]))  # Titre de la fenêtre
         self.setMaximumSize(self.width(), self.height()) # empêchement d'aggranissement de la fenêtre
-        
         # Création des 3 frames
         self.FrameDrBa = FrameDroiteBasse(config, self)
         self.FrameDrHa = FrameDroiteHaute(self.config,self)
         self.FrameG = FrameGauche(self.FrameDrBa.listePersonnes, self, self.config)
-        self.modifierBDD = ModifierBDD (config, config["BaseDonnees"])
-
+        self.modifierBDD = ModifierBDD(config, config["BaseDonnees"])
         # Créer un widget central et y appliquer le layout principal
         widget_central = QWidget()
         layoutPrincipal = QGridLayout(widget_central)  # layout appliqué ici
-
         layoutPrincipal.addWidget(self.FrameG, 0, 0, 2, 1)
         layoutPrincipal.addWidget(self.FrameDrHa, 0, 1)
         layoutPrincipal.addWidget(self.FrameDrBa, 1, 1)
-
         self.setCentralWidget(widget_central)  # c’est ici que tout s'affiche
-
         # Connexions
         self.FrameDrBa.boutonVal.clicked.connect(self.configurer)
         self.FrameDrHa.boutVal.clicked.connect(self.verifierRechercher)
@@ -54,26 +52,86 @@ class Fenetre(QMainWindow):
         self.FrameDrHa.boutSuite.clicked.connect(self.AllerALaSuite)
         self.FrameDrHa.prenomEntry.returnPressed.connect(self.validerRepNom)
         self.FrameDrHa.nomEntry.returnPressed.connect(self.verifierRechercher)
-
+        # langue de l'interface
+        self.langue = " "
+        self.langue = self.lireLangue()
+        print ("langue" + ":" + self.langue)
         self.show()
+        self. menus()
 
-        # menu
+    def menus(self) -> None:
+        # barre de menus
         menuBar = self.menuBar()
-        menuPrincipal = QMenu("Menu", self)
+        # menu principal
+        menuPrincipal = QMenu(_("Menu"), self)
+        # choix de la langue - sous menu de menuPrincipal
+        menuLangues = QMenu(_("Langues"), self)
+        groupe_langue = QActionGroup(self)
+        groupe_langue.setExclusive(True)
+        # action des langues
+        self.actionBrezhoneg = QAction("Brezhoneg", self, checkable=True)
+        self.actionBrezhoneg.triggered.connect(self.Brezhoneg)
+        self.actionEnglish = QAction("English", self, checkable=True)
+        self.actionEnglish.triggered.connect(self.English)
+        self.actionFrancais = QAction("Français", self, checkable=True)
+        self.actionFrancais.triggered.connect(self.Francais)
+        # action préselectionnée des radios-
+        if self.langue == "br":
+            self.actionBrezhoneg.setChecked(True)
+        elif self.langue == "en":
+            self.actionEnglish.setChecked(True)
+        else:
+            self.actionFrancais.setChecked(True)
+        # lier acions au menu et ay groupe langue
+        for action in (self.actionBrezhoneg, self.actionEnglish, self.actionFrancais):
+            groupe_langue.addAction(action)
+            menuLangues.addAction(action)
+        # action "Changer d'organisme"
+        actionChangerOrganisme = QAction(_("Changer d’organisme"), self)
+        actionChangerOrganisme.triggered.connect(self.changerOrganisme)
+        # action Licence GPL-V3
+        actionLicence = QAction(_("Licence GPL-v3"), self)
+        actionLicence.triggered.connect(self.afficherLicence)
+        # action "quitter"
+        actionQuitter = QAction(_("Quitter"), self)
+        actionQuitter.triggered.connect(self.quitter)
+        # "sousMenuLangues" -> menu menuPrincipal
+        menuPrincipal.addMenu(menuLangues)
+        menuPrincipal.addAction(actionChangerOrganisme)
+        menuPrincipal.addAction(actionLicence)
+        menuPrincipal.addAction(actionQuitter)
+        # lier le menu menuPrinipal au menuBar
         menuBar.addMenu(menuPrincipal)
 
-        actionChangerOrganisme = QAction("Changer d’organisme", self)
-        actionChangerOrganisme.triggered.connect(self.changerOrganisme)
+    def lireLangue(self) -> str:
+        """Récupérer la langue enregistrée (fr par défaut)."""
+        with open(configurationLangue, "r", encoding="utf-8") as f:
+            config_langue = json.load(f)
+        return config_langue.get("langueSelectionnee", "fr")
 
-        actionLicence = QAction("Licence GPL-v3", self)
-        actionLicence.triggered.connect(self.afficherLicence)
+    def ecritureLangue(self, langue: str) -> None:
+        """Écrire la langue sélectionnée dans le fichier."""
+        config_langue = {"langueSelectionnee": langue}
+        with open(configurationLangue, "w", encoding="utf-8") as f:
+            json.dump(config_langue, f, indent=4, ensure_ascii=False)
 
-        actionQuitter = QAction("Quitter", self)
-        actionQuitter.triggered.connect(self.quitter)
+    def Brezhoneg(self)->None:
+        print ("Brezhoneg")
+        self.ecritureLangue("br")
+        # sélection du radio
+        self.changerOrganisme()
 
-        menuPrincipal.addAction(actionLicence)
-        menuPrincipal.addAction(actionChangerOrganisme)
-        menuPrincipal.addAction(actionQuitter)
+    def English(self)->None:
+        print ("English")
+        self.ecritureLangue("en")
+        # redémarrage
+        self.changerOrganisme()
+
+    def Francais(self)->None:
+        print ("French")
+        self.ecritureLangue("fr")
+        # redémarrage
+        self.changerOrganisme()
 
     def changerOrganisme(self):
         """Changer d'organisme"""
@@ -110,8 +168,8 @@ class Fenetre(QMainWindow):
         else:  # nom + prénom
             self.FrameDrHa.prenomEntry.setEnabled(True)
             self.FrameDrHa.nomEntry.setEnabled(True)
-            self.FrameDrHa.prenomEntry.setPlaceholderText("ndiquez votre nom")
-            self.FrameDrHa.nomEntry.setPlaceholderText("ndiquez votre nom")
+            self.FrameDrHa.prenomEntry.setPlaceholderText(_("Indiquez votre prénom"))
+            self.FrameDrHa.nomEntry.setPlaceholderText(_("Indiquez votre nom"))
             self.FrameDrHa.prenomEntry.setFocus()
             
     def configAutresModes(self) -> None:
@@ -121,7 +179,6 @@ class Fenetre(QMainWindow):
         # Filtrage par option choisie
         if self.FrameDrBa.specialiteSelectionnee != "TOUS":
             self.enleverPersonnes()
-        
         self.FrameG.nbrePers = len(self.FrameG.listePersonnes)
         self.FrameG.rang = 0
         self.FrameG.numOrdrePers.setText(f"{self.FrameG.rang // 2 + 1}/{self.FrameG.nbrePers}")
@@ -230,9 +287,9 @@ class Fenetre(QMainWindow):
         mode = self.FrameDrBa.groupeBas.checkedButton().text() 
         match = True
 
-        if mode in ["Prenom+Nom", "Nom"]:  # le nom doit être vérifié
+        if self.FrameDrBa.boutonRadioBas1.isChecked() or self.FrameDrBa.boutonRadioBas3.isChecked():  # le nom doit être vérifié
             match &= nom.lower() == nomAttendu.lower()
-        if mode in ["Prenom+Nom", "Prenom"]:  # le prénom doit être vérifié
+        if self.FrameDrBa.boutonRadioBas1.isChecked() or self.FrameDrBa.boutonRadioBas2.isChecked():  # le prénom doit être vérifié
             self.FrameDrHa.nomEntry.setEnabled(False) # désactivation du nom
             match &= prenom.lower() == prenomAttendu.lower()
 
@@ -338,8 +395,8 @@ class Fenetre(QMainWindow):
                 for bouton in self.FrameG.boutons:
                     bouton.setEnabled(True)
         else:
-            self.FrameG.numOrdrePers.setText("0/0")
-            QMessageBox.information(self, "Aucun résultat", "Aucune personne trouvée.")
+            self.FrameG.numOrdrePers.setText(_("0/0"))
+            QMessageBox.information(self, _("Aucun résultat"), _("Aucune personne trouvée."))
 
 
     def validerRepNom(self):
@@ -348,8 +405,8 @@ class Fenetre(QMainWindow):
         modeRecherche = self.FrameDrBa.groupeBas.checkedButton().text()
         modeGeneral = self.FrameDrBa.groupeHaut.checkedButton().text()
 
-        if modeRecherche == "Prenom":  # Prénom seul
-            if modeGeneral == "Test ecrit":  # Test écrit
+        if self.FrameDrBa.boutonRadioBas2.isChecked():  # Prenom
+            if self.FrameDrBa.boutonRadioHaut3.isChecked():  # Test écrit
                 self.verifier()
             else:
                 self.rechercher()
@@ -359,14 +416,14 @@ class Fenetre(QMainWindow):
 
                         
     def afficherLicence(self):
-        texte = (
+        texte = _(
             "Ce logiciel est distribué sous licence GNU GPL version 3.\n\n"
             "Vous pouvez le redistribuer et/ou le modifier selon les termes de cette licence.\n\n"
-            "Plus d'informations : https://www.gnu.org/licenses/gpl-3.0.html \n\n"
+            "Plus d'informations : https://www.gnu.org/licenses/gpl-3.0.html\n\n"
             "© 2025 Gérard Le Rest - ge.lerest@gmail.com"
-            
         )
-        QMessageBox.information(self, "GPL-v3", texte)
+        QMessageBox.information(self, _("GPL-v3"), texte)
+
     
     def quitter(self):
         self.close()
