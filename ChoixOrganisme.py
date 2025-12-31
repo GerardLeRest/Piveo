@@ -26,6 +26,7 @@ class ChoixOrganisme(QWidget):
 
     def interface(self) -> None:
         """création de l'interface"""
+        self.resize(250, 400)
         self.setWindowTitle(_("Piveo"))
         self.setStyleSheet("background-color: white;")  # fond blanc propre
         layout = QVBoxLayout() # layout général

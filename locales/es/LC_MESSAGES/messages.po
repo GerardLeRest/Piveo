@@ -1,12 +1,13 @@
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-12-30 18:05+0100\n"
-"PO-Revision-Date: 2025-12-30 18:45+0100\n"
+"PO-Revision-Date: 2025-12-31 11:30+0100\n"
 "Last-Translator: Gérard Le Rest\n"
-"Language-Team: English\n"
-"Language: en\n"
+"Language-Team: Español\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -17,19 +18,19 @@ msgstr "Piveo"
 
 #: ChoixOrganisme.py:35
 msgid "mode de fonctionnement"
-msgstr "operating mode"
+msgstr "modo de funcionamiento"
 
 #: ChoixOrganisme.py:47
 msgid "Ecole"
-msgstr "School"
+msgstr "Escuela"
 
 #: ChoixOrganisme.py:48 utils_i18n.py:8
 msgid "Entreprise"
-msgstr "Company"
+msgstr "Empresa"
 
 #: ChoixOrganisme.py:49 utils_i18n.py:4
 msgid "Parlement"
-msgstr "Parliament"
+msgstr "Parlamento"
 
 #: ChoixOrganisme.py:59
 msgid "OK"
@@ -41,31 +42,31 @@ msgstr "Piveo - "
 
 #: FenetrePrincipale.py:77
 msgid "Menu"
-msgstr "Menu"
+msgstr "Menú"
 
 #: FenetrePrincipale.py:79
 msgid "Langues"
-msgstr "Languages"
+msgstr "Idiomas"
 
 #: FenetrePrincipale.py:101
 msgid "Changer d’organisme"
-msgstr "Change organisation"
+msgstr "Cambiar de organismo"
 
 #: FenetrePrincipale.py:104
 msgid "Licence GPL-v3"
-msgstr "GPL-v3 License"
+msgstr "Licencia GPL-v3"
 
 #: FenetrePrincipale.py:107
 msgid "Quitter"
-msgstr "Quit"
+msgstr "Salir"
 
 #: FenetrePrincipale.py:181 FrameDroiteHaute.py:40
 msgid "Indiquez votre prénom"
-msgstr "Enter your first name"
+msgstr "Indique su nombre"
 
 #: FenetrePrincipale.py:182 FrameDroiteHaute.py:54
 msgid "Indiquez votre nom"
-msgstr "Enter your last name"
+msgstr "Indique su apellido"
 
 #: FenetrePrincipale.py:408 FrameDroiteHaute.py:142
 msgid "0/0"
@@ -73,11 +74,11 @@ msgstr "0/0"
 
 #: FenetrePrincipale.py:409
 msgid "Aucun résultat"
-msgstr "No result"
+msgstr "Sin resultados"
 
 #: FenetrePrincipale.py:409
 msgid "Aucune personne trouvée."
-msgstr "No person found."
+msgstr "No se ha encontrado ninguna persona."
 
 #: FenetrePrincipale.py:430
 msgid ""
@@ -90,11 +91,11 @@ msgid ""
 "\n"
 "© 2025 Gérard Le Rest - ge.lerest@gmail.com"
 msgstr ""
-"This software is distributed under the GNU GPL version 3 license.\n"
+"Este software se distribuye bajo la licencia GNU GPL versión 3.\n"
 "\n"
-"You may redistribute and/or modify it under the terms of this license.\n"
+"Puede redistribuirlo y/o modificarlo según los términos de esta licencia.\n"
 "\n"
-"More information: https://www.gnu.org/licenses/gpl-3.0.html\n"
+"Más información: https://www.gnu.org/licenses/gpl-3.0.html\n"
 "\n"
 "© 2025 Gérard Le Rest - ge.lerest@gmail.com"
 
@@ -104,104 +105,104 @@ msgstr "GPL-v3"
 
 #: FrameDroiteBasse.py:34
 msgid "Apprentissage"
-msgstr "Learning"
+msgstr "Aprendizaje"
 
 #: FrameDroiteBasse.py:35
 msgid "Test mental"
-msgstr "Mental test"
+msgstr "Prueba mental"
 
 #: FrameDroiteBasse.py:36
 msgid "Test ecrit"
-msgstr "Written test"
+msgstr "Prueba escrita"
 
 #: FrameDroiteBasse.py:37
 msgid "Rechercher"
-msgstr "Search"
+msgstr "Buscar"
 
 #: FrameDroiteBasse.py:73
 msgid "Aléatoire"
-msgstr "Random"
+msgstr "Aleatorio"
 
 #: FrameDroiteBasse.py:79
 msgid "Prenom+Nom"
-msgstr "First name + Last name"
+msgstr "Nombre+Apellido"
 
 #: FrameDroiteBasse.py:80
 msgid "Prenom"
-msgstr "First name"
+msgstr "Nombre"
 
 #: FrameDroiteBasse.py:81 FrameDroiteHaute.py:43 FrameGauche.py:49
 msgid "Nom"
-msgstr "Last name"
+msgstr "Apellido"
 
 #: FrameDroiteBasse.py:112 FrameDroiteHaute.py:111
 msgid "Valider"
-msgstr "Validate"
+msgstr "Validar"
 
 #: FrameDroiteBasse.py:138
 #, python-format
 msgid "- choisir une %(structure)s -"
-msgstr "- choose a %(structure)s -"
+msgstr "- elegir una %(structure)s -"
 
 #: FrameDroiteBasse.py:142
 #, python-format
 msgid "- choisir un %(structure)s -"
-msgstr "- choose a %(structure)s -"
+msgstr "- elegir un %(structure)s -"
 
 #: FrameDroiteHaute.py:29 FrameGauche.py:43
 msgid "Prénom"
-msgstr "First name"
+msgstr "Nombre"
 
 #: FrameDroiteHaute.py:115
 msgid "Effacer"
-msgstr "Clear"
+msgstr "Borrar"
 
 #: FrameDroiteHaute.py:119
 msgid "Suite"
-msgstr "Next"
+msgstr "Siguiente"
 
 #: FrameGauche.py:46
 msgid "Prénom :"
-msgstr "First name:"
+msgstr "Nombre :"
 
 #: FrameGauche.py:52
 msgid "Nom :"
-msgstr "Last name:"
+msgstr "Apellido :"
 
 #: FrameGauche.py:107
 msgid "rang / effectif "
-msgstr "rank / total "
+msgstr "posición / total "
 
-#: utils_i18n.py:106
+#: FrameGauche.py:107
 msgid "Classe"
-msgstr "Class"
+msgstr "Clase"
 
 #: utils_i18n.py:111
 msgid "Options"
-msgstr "Options"
+msgstr "Opciones"
 
 #: utils_i18n.py:5
 msgid "Parti"
-msgstr "Party"
+msgstr "Partido"
 
 #: utils_i18n.py:6
 msgid "Député"
-msgstr "Member of Parliament"
+msgstr "Diputado"
 
 #: utils_i18n.py:7
 msgid "Commissions"
-msgstr "Committees"
+msgstr "Comisiones"
 
 #: utils_i18n.py:9
 msgid "Département"
-msgstr "Department"
+msgstr "Departamento"
 
 #: utils_i18n.py:10
 msgid "Salarié"
-msgstr "Employee"
+msgstr "Empleado"
 
 msgid "Attention"
-msgstr "Warning"
+msgstr "Atención"
 
 msgid "Les changements se feront au prochain démarrage."
-msgstr "Changes will take effect on the next startup."
+msgstr "Los cambios se aplicarán en el próximo inicio."

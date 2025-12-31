@@ -103,12 +103,12 @@ class FrameGauche (QWidget):
         layoutBas.addWidget(self.numOrdrePers, alignment=Qt.AlignCenter)
         # affichage de la structure 
         self.structure=QLabel() # label de la structure
-        self.structure.setText(ui_value(config["Structure"]))
+        self.structure.setText(_(ui_value(config["Structure"])))
         self.structure.setStyleSheet("color: #76aeba; font-weight: bold; font-size: 11pt;")
         layoutBas.addWidget(self.structure, alignment=Qt.AlignCenter)
         # affichage des options
         self.specialites = QLabel() # permet de changer le texte du label
-        self.specialites.setText(ui_value(config["Specialite"]))
+        self.specialites.setText(_(ui_value(config["Specialite"])))
         self.specialites.setStyleSheet("font-size: 10pt;")
         layoutBas.addWidget(self.specialites, alignment=Qt.AlignCenter)
         # attachement au layout gauche

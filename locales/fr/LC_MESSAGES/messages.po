@@ -178,6 +178,10 @@ msgstr "rang / effectif "
 msgid "Classe"
 msgstr "Classe"
 
+#: utils_i18n.py:111
+msgid "Options"
+msgstr "Options"
+
 #: utils_i18n.py:5
 msgid "Parti"
 msgstr "Parti"
@@ -197,4 +201,11 @@ msgstr "Département"
 #: utils_i18n.py:10
 msgid "Salarié"
 msgstr "Salarié"
+
+msgid "Attention"
+msgstr "Attention"
+
+msgid "Les changements se feront au prochain démarrage."
+msgstr "Les changements se feront au prochain démarrage."
+
 

@@ -177,6 +177,10 @@ msgstr "renk / hollad "
 msgid "Classe"
 msgstr "Klas"
 
+#: utils_i18n.py:111
+msgid "Options"
+msgstr "Options"
+
 #: utils_i18n.py:5
 msgid "Parti"
 msgstr "Strollad"
@@ -197,3 +201,8 @@ msgstr "Departamant"
 msgid "Salarié"
 msgstr "Gopridi"
 
+msgid "Attention"
+msgstr "Diwallit"
+
+msgid "Les changements se feront au prochain démarrage."
+msgstr "Ar cheñchamantoù a vo lakaet e pleustr er c'hentañ loc'hañ."

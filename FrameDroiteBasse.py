@@ -55,8 +55,8 @@ class FrameDroiteBasse (QWidget):
         layoutGrille = QGridLayout()
         layoutGrille.setSpacing(10)
          # labels)
-        layoutGrille.addWidget(QLabel(ui_value(self.config["Structure"])), 0, 0)
-        layoutGrille.addWidget(QLabel(ui_value(self.config["Specialite"])), 0, 1)
+        layoutGrille.addWidget(QLabel(_(ui_value(self.config["Structure"]))), 0, 0)
+        layoutGrille.addWidget(QLabel(_(ui_value(self.config["Specialite"]))), 0, 1)
         ## ComboBox
         self.comboBoxGauche = QComboBox()
         self.comboBoxDroite = QComboBox()

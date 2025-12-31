@@ -69,6 +69,8 @@ class Fenetre(QMainWindow):
         self.actionBrezhoneg.triggered.connect(self.Brezhoneg)
         self.actionEnglish = QAction("English", self, checkable=True)
         self.actionEnglish.triggered.connect(self.English)
+        self.actionEspagnol = QAction("Español", self, checkable=True)
+        self.actionEspagnol.triggered.connect(self.Espagnol)
         self.actionFrancais = QAction("Français", self, checkable=True)
         self.actionFrancais.triggered.connect(self.Francais)
         with open(configurationLangue, "r", encoding="utf-8") as f:
@@ -77,15 +79,14 @@ class Fenetre(QMainWindow):
             self.actionBrezhoneg.setChecked(True)
         elif langue == "en":
             self.actionEnglish.setChecked(True)
+        elif langue == "es":
+            self.actionEspagnol.setChecked(True)
         else:
             self.actionFrancais.setChecked(True)    
         # lier acions au menu et ay groupe langue
-        for action in (self.actionBrezhoneg, self.actionEnglish, self.actionFrancais):
+        for action in (self.actionBrezhoneg, self.actionEnglish, self.actionEspagnol, self.actionFrancais):
             groupe_langue.addAction(action)
             menuLangues.addAction(action)
-        # action "Changer d'organisme"
-        actionChangerOrganisme = QAction(_("Changer d’organisme"), self)
-        actionChangerOrganisme.triggered.connect(self.changerOrganisme)
         # action Licence GPL-V3
         actionLicence = QAction(_("Licence GPL-v3"), self)
         actionLicence.triggered.connect(self.afficherLicence)
@@ -94,7 +95,6 @@ class Fenetre(QMainWindow):
         actionQuitter.triggered.connect(self.quitter)
         # "sousMenuLangues" -> menu menuPrincipal
         menuPrincipal.addMenu(menuLangues)
-        menuPrincipal.addAction(actionChangerOrganisme)
         menuPrincipal.addAction(actionLicence)
         menuPrincipal.addAction(actionQuitter)
         # lier le menu menuPrinipal au menuBar
@@ -109,25 +109,29 @@ class Fenetre(QMainWindow):
     def Brezhoneg(self)->None:
         self.ecritureLangue("br")
         # sélection du radio
-        self.changerOrganisme()
+        self.afficherMessage()
 
     def English(self)->None:
         self.ecritureLangue("en")
         # redémarrage
-        self.changerOrganisme()
+        self.afficherMessage()
 
     def Francais(self)->None:
         self.ecritureLangue("fr")
         # redémarrage
-        self.changerOrganisme()
+        self.afficherMessage()
 
-    def changerOrganisme(self):
-        "Redémarrer"
-        self.close()
-        # from ChoixOrganisme import ChoixOrganisme
-        # self.boiteAccueil = ChoixOrganisme()
-        # self.boiteAccueil.show()
-        
+    def Espagnol(self)->None:
+        self.ecritureLangue("es")
+        # redémarrage
+        self.afficherMessage()
+
+    def afficherMessage(self):
+        QMessageBox.warning(
+            self,
+            _("Attention"),
+            _("Les changements se feront au prochain démarrage.")
+        )
                 
     def configurer(self) -> None:
         """ configurer l'application"""
@@ -357,9 +361,9 @@ class Fenetre(QMainWindow):
             prenom_eleve = eleve[0].lower().strip()
             nom_eleve = eleve[1].lower().strip()
             # conditions               
-            if mode == "Prenom":
+            if mode == _("Prenom"):
                 condition = (prenom == prenom_eleve)
-            elif mode == "Nom":
+            elif mode == _("Nom"):
                 condition = (nom == nom_eleve)
             else:
                 condition = (prenom == prenom_eleve and nom == nom_eleve)
