@@ -73,6 +73,8 @@ class Fenetre(QMainWindow):
         self.actionEspagnol.triggered.connect(self.Espagnol)
         self.actionFrancais = QAction("Français", self, checkable=True)
         self.actionFrancais.triggered.connect(self.Francais)
+        self.actionJaponnais = QAction("日本語", self, checkable=True)
+        self.actionJaponnais.triggered.connect(self.Japonnais)
         with open(configurationLangue, "r", encoding="utf-8") as f:
             langue = json.load(f).get("langueSelectionnee", "fr")
         if langue == "br":
@@ -81,10 +83,13 @@ class Fenetre(QMainWindow):
             self.actionEnglish.setChecked(True)
         elif langue == "es":
             self.actionEspagnol.setChecked(True)
+        elif langue == "ja_JP":
+            self.actionJaponnais.setChecked(True)
         else:
             self.actionFrancais.setChecked(True)    
         # lier acions au menu et ay groupe langue
-        for action in (self.actionBrezhoneg, self.actionEnglish, self.actionEspagnol, self.actionFrancais):
+        for action in (self.actionBrezhoneg, self.actionEnglish, self.actionEspagnol,
+                       self.actionFrancais, self.actionJaponnais):
             groupe_langue.addAction(action)
             menuLangues.addAction(action)
         # action Licence GPL-V3
@@ -123,6 +128,11 @@ class Fenetre(QMainWindow):
 
     def Espagnol(self)->None:
         self.ecritureLangue("es")
+        # redémarrage
+        self.afficherMessage()
+
+    def Japonnais(self)->None:
+        self.ecritureLangue("ja_JP")
         # redémarrage
         self.afficherMessage()
 
