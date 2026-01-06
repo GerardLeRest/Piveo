@@ -3,12 +3,16 @@
 
 import sys, json, locale, gettext
 from pathlib import Path
+from GestionLangue import GestionLangue
 
 BASE_DIR = Path(__file__).resolve().parent
+fichierJSON = BASE_DIR / "fichiers" / "configurationLangue.json"
 LOCALE_DIR = (BASE_DIR / "locales").resolve()
 
-with open(BASE_DIR / "fichiers" / "configurationLangue.json", "r", encoding="utf-8") as f:
-    langue = json.load(f).get("langueSelectionnee", "fr")
+gestionLangue = GestionLangue(fichierJSON)
+langue = gestionLangue.lire()
+# with open(BASE_DIR / "fichiers" / "configurationLangue.json", "r", encoding="utf-8") as f:
+#     langue = json.load(f).get("langueSelectionnee", "fr")
 
 locale.setlocale(locale.LC_ALL, "")
 gettext.translation(

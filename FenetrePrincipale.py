@@ -6,7 +6,7 @@
 # du lycée
 """
 
-import os, random, copy, json, locale
+import os, random, copy
 from pathlib import Path
 from FrameGauche import *
 from FrameDroiteHaute import *
@@ -18,9 +18,13 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtGui import QPixmap, QAction, QActionGroup
 from utils_i18n import ui_value
+from pathlib import Path
 from builtins import _
-repertoire_racine = Path(__file__).resolve().parent
-configurationLangue = repertoire_racine / "fichiers" / "configurationLangue.json"
+from GestionLangue import GestionLangue
+
+
+repertoireRacine = Path(__file__).resolve().parent
+fichierLangue = repertoireRacine / "fichiers" / "configurationLangue.json"
 
 
 class Fenetre(QMainWindow):
@@ -65,16 +69,38 @@ class Fenetre(QMainWindow):
         groupe_langue = QActionGroup(self)
         groupe_langue.setExclusive(True)
         # action des langues
+        self.gestionLangue = GestionLangue(fichierLangue) # objet lecture/ecriture
         self.actionBrezhoneg = QAction("Brezhoneg", self, checkable=True)
-        self.actionBrezhoneg.triggered.connect(self.Brezhoneg)
+        self.actionBrezhoneg.triggered.connect(lambda: self.changerLangue("br"))
         self.actionEnglish = QAction("English", self, checkable=True)
-        self.actionEnglish.triggered.connect(self.English)
+        self.actionEnglish.triggered.connect(lambda: self.changerLangue("en"))
         self.actionEspagnol = QAction("Español", self, checkable=True)
-        self.actionEspagnol.triggered.connect(self.Espagnol)
+        self.actionEspagnol.triggered.connect(lambda: self.changerLangue("es"))
         self.actionFrancais = QAction("Français", self, checkable=True)
-        self.actionFrancais.triggered.connect(self.Francais)
-        with open(configurationLangue, "r", encoding="utf-8") as f:
-            langue = json.load(f).get("langueSelectionnee", "fr")
+        self.actionFrancais.triggered.connect(lambda: self.changerLangue("fr"))
+        # lier acions au menu et ay groupe langue
+        for action in (self.actionBrezhoneg, self.actionEnglish, self.actionEspagnol,
+                       self.actionFrancais):
+            groupe_langue.addAction(action)
+            menuLangues.addAction(action)
+        # # récuperation du code de la langue
+        langueSelectionnee = self.gestionLangue.lire() 
+        self.recuperation_code_langue(langueSelectionnee)
+        # action Licence GPL-V3
+        actionLicence = QAction(_("Licence GPL-v3"), self)
+        actionLicence.triggered.connect(self.afficherLicence)
+        # action "quitter"
+        actionQuitter = QAction(_("Quitter"), self)
+        actionQuitter.triggered.connect(self.close)
+        # "sousMenuLangues" -> menu menuPrincipal
+        menuPrincipal.addMenu(menuLangues)
+        menuPrincipal.addAction(actionLicence)
+        menuPrincipal.addAction(actionQuitter)
+        # lier le menu menuPrinipal au menuBar
+        menuBar.addMenu(menuPrincipal)
+        
+    def recuperation_code_langue(self, langue)->None:
+        "Récupérer le code de la langue"
         if langue == "br":
             self.actionBrezhoneg.setChecked(True)
         elif langue == "en":
@@ -83,48 +109,10 @@ class Fenetre(QMainWindow):
             self.actionEspagnol.setChecked(True)
         else:
             self.actionFrancais.setChecked(True)    
-        # lier acions au menu et ay groupe langue
-        for action in (self.actionBrezhoneg, self.actionEnglish, self.actionEspagnol,
-                       self.actionFrancais):
-            groupe_langue.addAction(action)
-            menuLangues.addAction(action)
-        # action Licence GPL-V3
-        actionLicence = QAction(_("Licence GPL-v3"), self)
-        actionLicence.triggered.connect(self.afficherLicence)
-        # action "quitter"
-        actionQuitter = QAction(_("Quitter"), self)
-        actionQuitter.triggered.connect(self.quitter)
-        # "sousMenuLangues" -> menu menuPrincipal
-        menuPrincipal.addMenu(menuLangues)
-        menuPrincipal.addAction(actionLicence)
-        menuPrincipal.addAction(actionQuitter)
-        # lier le menu menuPrinipal au menuBar
-        menuBar.addMenu(menuPrincipal)
-        
-    def ecritureLangue(self, langue: str) -> None:
-        """Écrire la langue sélectionnée dans le fichier."""
-        config_langue = {"langueSelectionnee": langue}
-        with open(configurationLangue, "w", encoding="utf-8") as f:
-            json.dump(config_langue, f, indent=4, ensure_ascii=False)
-
-    def Brezhoneg(self)->None:
-        self.ecritureLangue("br")
+    
+    def changerLangue(self, codeLangue)->None:
+        self.gestionLangue.ecrire(codeLangue)
         # sélection du radio
-        self.afficherMessage()
-
-    def English(self)->None:
-        self.ecritureLangue("en")
-        # redémarrage
-        self.afficherMessage()
-
-    def Francais(self)->None:
-        self.ecritureLangue("fr")
-        # redémarrage
-        self.afficherMessage()
-
-    def Espagnol(self)->None:
-        self.ecritureLangue("es")
-        # redémarrage
         self.afficherMessage()
 
     def afficherMessage(self):
@@ -289,7 +277,7 @@ class Fenetre(QMainWindow):
 
         # Affichage des icones
         icone = "check.png" if match else "cross.png"
-        image = QPixmap(os.path.join(repertoireRacine, "fichiers", "icones", icone))
+        image = QPixmap(str(repertoireRacine / "fichiers" / "icones" / icone))
         self.FrameDrHa.labelImageGauche.setPixmap(image)
    
         if match:
@@ -417,7 +405,3 @@ class Fenetre(QMainWindow):
             "© 2025 Gérard Le Rest - ge.lerest@gmail.com"
         )
         QMessageBox.information(self, _("GPL-v3"), texte)
-
-    
-    def quitter(self):
-        self.close()

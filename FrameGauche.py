@@ -11,11 +11,13 @@ from PySide6.QtWidgets import QWidget, QVBoxLayout, QGridLayout, QLabel, QHBoxLa
 from PySide6.QtGui import QPixmap, QIcon
 from PySide6.QtCore import QSize, Qt
 from ModifierBDD import  ModifierBDD
+from pathlib import Path
 from builtins import _
 from utils import get_repertoire_racine
 from utils_i18n import ui_value
 
-repertoireRacine=os.path.dirname(os.path.abspath(__file__)) # répetoire du fichier pyw
+repertoireRacine = os.path.dirname(os.path.abspath(__file__))
+fichierLangue = os.path.join(repertoireRacine, "fichiers", "configurationLangue.json")
 icones=["Gnome-go-first.png","Gnome-go-previous.png","Gnome-go-next.png","Gnome-go-last.png", ]
 
 class FrameGauche (QWidget):
