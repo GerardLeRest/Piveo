@@ -5,26 +5,28 @@ import sys, json, locale, gettext
 from pathlib import Path
 from GestionLangue import GestionLangue
 
+# Gestion de la langue de cette cesssion
 BASE_DIR = Path(__file__).resolve().parent
-fichierJSON = BASE_DIR / "fichiers" / "configurationLangue.json"
-LOCALE_DIR = (BASE_DIR / "locales").resolve()
+LOCALE_DIR = BASE_DIR / "locales"
 
-gestionLangue = GestionLangue(fichierJSON)
+configDir = Path.home() / ".config" / "piveo"
+configDir.mkdir(parents=True, exist_ok=True)
+fichierLangue = configDir / "configurationLangue.json"
+
+gestionLangue = GestionLangue(fichierLangue)
 langue = gestionLangue.lire()
-# with open(BASE_DIR / "fichiers" / "configurationLangue.json", "r", encoding="utf-8") as f:
-#     langue = json.load(f).get("langueSelectionnee", "fr")
 
 locale.setlocale(locale.LC_ALL, "")
-gettext.translation(
-    "messages",
-    localedir=LOCALE_DIR,
+
+translation = gettext.translation(
+    domain="messages",
+    localedir=str(LOCALE_DIR),
     languages=[langue],
-    fallback=False,
-).install()
+    fallback=True
+)
+translation.install()
 
-# _("Menu")  # TEST
-
-# ⬇️ IMPORTS UI APRÈS gettext
+# Lancement de la fenetre organisme
 from PySide6.QtWidgets import QApplication
 from ChoixOrganisme import ChoixOrganisme
 

@@ -56,6 +56,8 @@ class Fenetre(QMainWindow):
         self.FrameDrHa.boutSuite.clicked.connect(self.AllerALaSuite)
         self.FrameDrHa.prenomEntry.returnPressed.connect(self.validerRepNom)
         self.FrameDrHa.nomEntry.returnPressed.connect(self.verifierRechercher)
+        # repertoire de configuation de la fenetre
+        self.fichierLangue: Path = Path.home() / ".config" / "piveo" / "configurationLangue.json"
         self.show()
         self. menus()
         
@@ -69,7 +71,7 @@ class Fenetre(QMainWindow):
         groupe_langue = QActionGroup(self)
         groupe_langue.setExclusive(True)
         # action des langues
-        self.gestionLangue = GestionLangue(fichierLangue) # objet lecture/ecriture
+        self.gestionLangue = GestionLangue(self.fichierLangue) # objet lecture/ecriture
         self.actionBrezhoneg = QAction("Brezhoneg", self, checkable=True)
         self.actionBrezhoneg.triggered.connect(lambda: self.changerLangue("br"))
         self.actionEnglish = QAction("English", self, checkable=True)
