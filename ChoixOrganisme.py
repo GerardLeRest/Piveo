@@ -15,6 +15,7 @@ from PySide6.QtGui import QPixmap
 from builtins import _
 from FenetrePrincipale import Fenetre
 from utils import get_repertoire_racine
+from pathlib import Path
 import json, os
 
 class ChoixOrganisme(QWidget):
@@ -78,9 +79,9 @@ class ChoixOrganisme(QWidget):
 
         # Logo centré
         labelLogo = QLabel()
-        self.repertoire_racine = get_repertoire_racine() # voir fichier utils.py
-        chemin_icone = os.path.join(self.repertoire_racine, "fichiers", "logos", "logoPiveo.png")
-        pixmap = QPixmap(chemin_icone)
+        self.repertoireRacine = Path(get_repertoire_racine())
+        chemin_icone = self.repertoireRacine / "fichiers" / "logos" / "logoPiveo.png"
+        pixmap = QPixmap(str(chemin_icone))
         if not pixmap.isNull():
             pixmap = pixmap.scaledToWidth(100, Qt.SmoothTransformation)
             labelLogo.setPixmap(pixmap)
@@ -100,7 +101,8 @@ class ChoixOrganisme(QWidget):
         else:
             fichier = None
         try:
-            with open(fichier, "r", encoding="utf-8") as f:
+            chemin = self.repertoireRacine / fichier
+            with open(chemin, "r", encoding="utf-8") as f:
                 config = json.load(f)
         except Exception as e:
             print(f"Erreur lors du chargement du fichier : {e}")

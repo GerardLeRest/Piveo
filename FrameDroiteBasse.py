@@ -142,7 +142,7 @@ class FrameDroiteBasse (QWidget):
             phrase = _("- choisir un %(structure)s -") % {
                 "structure": self.config["Structure"]
                 }
-        return structures
+        return [phrase] + structures
 
     def configRechercher(self) -> None:
         """activer/désactiver les listes les comboBox, des radiobuttons

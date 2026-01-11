@@ -6,3 +6,10 @@ version 1.3.1:
 
 - rectifications de traduction
 - rectification du placement fichier de configuration de la langue (dosssier personnel)
+
+version 1.3.2:
+
+- problème de chemin relatif => icone alacarte ne trouve pas les chemins relatifs
+
+version 1.3.3:
+- bug: phrase "Choisir un...."dans le menu organisme disparu
