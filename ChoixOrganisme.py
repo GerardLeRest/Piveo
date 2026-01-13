@@ -16,7 +16,7 @@ from builtins import _
 from FenetrePrincipale import Fenetre
 from utils import get_repertoire_racine
 from pathlib import Path
-import json, os
+import json
 
 class ChoixOrganisme(QWidget):
     """Choisir l'organisme - Parlement - École - Entreprise"""

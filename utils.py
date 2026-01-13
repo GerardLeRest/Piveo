@@ -1,8 +1,5 @@
 import os, sys
 
-import os
-import sys
-
 def get_repertoire_racine() -> str:
     """
     Retourne le répertoire racine de l'application.

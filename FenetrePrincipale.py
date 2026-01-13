@@ -6,7 +6,7 @@
 # du lycée
 """
 
-import os, random, copy
+import random, copy
 from pathlib import Path
 from FrameGauche import *
 from FrameDroiteHaute import *
@@ -17,14 +17,15 @@ from PySide6.QtWidgets import (
     QMenu, QMessageBox
 )
 from PySide6.QtGui import QPixmap, QAction, QActionGroup
+from utils import get_repertoire_racine
 from utils_i18n import ui_value
 from pathlib import Path
 from builtins import _
 from GestionLangue import GestionLangue
 
 
-repertoireRacine = Path(__file__).resolve().parent
-fichierLangue = repertoireRacine / "fichiers" / "configurationLangue.json"
+REPERTOIRE_RACINE = Path(get_repertoire_racine())
+FICHIER_LANGUE: Path = Path.home() / ".config" / "piveo" / "configurationLangue.json"
 
 
 class Fenetre(QMainWindow):
@@ -57,7 +58,7 @@ class Fenetre(QMainWindow):
         self.FrameDrHa.prenomEntry.returnPressed.connect(self.validerRepNom)
         self.FrameDrHa.nomEntry.returnPressed.connect(self.verifierRechercher)
         # repertoire de configuation de la fenetre
-        self.fichierLangue: Path = Path.home() / ".config" / "piveo" / "configurationLangue.json"
+        
         self.show()
         self. menus()
         
@@ -71,7 +72,7 @@ class Fenetre(QMainWindow):
         groupe_langue = QActionGroup(self)
         groupe_langue.setExclusive(True)
         # action des langues
-        self.gestionLangue = GestionLangue(self.fichierLangue) # objet lecture/ecriture
+        self.gestionLangue = GestionLangue(FICHIER_LANGUE) # objet lecture/ecriture
         self.actionBrezhoneg = QAction("Brezhoneg", self, checkable=True)
         self.actionBrezhoneg.triggered.connect(lambda: self.changerLangue("br"))
         self.actionEnglish = QAction("English", self, checkable=True)
@@ -278,8 +279,10 @@ class Fenetre(QMainWindow):
             match &= prenom.lower() == prenomAttendu.lower()
 
         # Affichage des icones
-        icone = "check.png" if match else "cross.png"
-        image = QPixmap(str(repertoireRacine / "fichiers" / "icones" / icone))
+        # icone = ":/check.png" if match else ":/cross.png" # voir fichier icons_rc et icons_qrc
+        cheminIcone = REPERTOIRE_RACINE / "fichiers" / "icones"
+        icone = cheminIcone / "check.png" if match else cheminIcone / "cross.png"
+        image = QPixmap(icone)
         self.FrameDrHa.labelImageGauche.setPixmap(image)
    
         if match:
@@ -361,10 +364,8 @@ class Fenetre(QMainWindow):
 
             if condition:
                 self.FrameG.listePersonnes.append(eleve)
-
         # Après avoir collecté tous les résultats, mise à jour
         self.FrameG.nbrePers = len(self.FrameG.listePersonnes)
-
         if self.FrameG.nbrePers > 0:
             self.FrameG.rang = 0
             self.FrameG.numOrdrePers.setText(f"1/{self.FrameG.nbrePers}")
@@ -382,7 +383,6 @@ class Fenetre(QMainWindow):
             self.FrameG.numOrdrePers.setText(_("0/0"))
             QMessageBox.information(self, _("Aucun résultat"), _("Aucune personne trouvée."))
 
-
     def validerRepNom(self):
         """Valider l'entrée prénom selon le mode sélectionné, ou passer au champ nom"""
 
@@ -397,13 +397,12 @@ class Fenetre(QMainWindow):
         else:
             # Passer au champ Nom
             self.focusNextChild()
-
                         
     def afficherLicence(self):
         texte = _(
             "Ce logiciel est distribué sous licence GNU GPL version 3.\n\n"
             "Vous pouvez le redistribuer et/ou le modifier selon les termes de cette licence.\n\n"
             "Plus d'informations : https://www.gnu.org/licenses/gpl-3.0.html\n\n"
-            "© 2025 Gérard Le Rest - ge.lerest@gmail.com"
+            "© 2026 Gérard Le Rest - ge.lerest@gmail.com"
         )
         QMessageBox.information(self, _("GPL-v3"), texte)
