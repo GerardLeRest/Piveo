@@ -1,4 +1,4 @@
-# MémoVue
+# Piveo
 
 ## Fonction du projet
 
@@ -13,7 +13,7 @@ L'interface comporte trois zones :
 - **Zone en haut à droite** : permet de répondre aux questions.  
 - **Zone en bas à droite** : permet d'effectuer les réglages (n'oubliez pas le bouton **Valider** !).  
 
-![interface](fichiers/images/interface.png)
+![interface](fichiers/images/interface-1.png)
 
 De bas en haut, dans la zone en bas à droite :  
 
@@ -100,15 +100,14 @@ cd ~/Téléchargements
 Rendez-vous sur la page des releases GitHub :  
 https://github.com/GerardLeRest/Piveo/releases
 
-Téléchargez la **dernière archive AppImage**, par exemple :
-Piveo-AppImage-v1.2.0.tar.xz
+#### Téléchargez la **dernière archive AppImage**, par exemple :
 
----
+Piveo-x.x.x-_x86_64.AppImage (x.x.x sont à remplacer par 2.2.1 pour la version 2.2.1, par exemple)
 
 #### 4. Décompresser l’archive
 
 ```bash
-tar -xf Piveo-AppImage-v1.2.0.tar.xz
+tar -xf Piveo-x.x.x-_x86_64.AppImage.tar.xz
 ```
 
 ---
@@ -116,8 +115,10 @@ tar -xf Piveo-AppImage-v1.2.0.tar.xz
 #### 5. Copier les fichiers dans le dossier Piveo
 
 ```bash
-cp -r ~/Téléchargements/Piveo-AppImage-v1.2.0/. ~/Piveo
+cp -r ~/Téléchargements/Piveo-x.x.x-_x86_64.AppImage/. ~/Piveo
 ```
+
+On peut également utiliser le dossier /opt au lieu de ~/Piveo de  qui est spécialement conçu pour ce genre d'installation.
 
 ---
 
@@ -128,6 +129,7 @@ ls ~/Piveo
 ```
 
 Le dossier doit contenir :
+
 - l’AppImage **Piveo_1.2.0_x86_64.AppImage**
 - **six fichiers**
 - le dossier **`fichiers`**
@@ -137,17 +139,21 @@ Le dossier doit contenir :
 #### 7. Rendre l’AppImage exécutable
 
 ```bash
-chmod +x ~/Piveo/Piveo_1.2.0_x86_64.AppImage
+chmod +x ~/Piveo-x.x.x-_x86_64.AppImage
 ```
 
 ---
 
 #### 8. Lancer le logiciel
+
 Se rendre dans le dossier ~/Piveo:
+
 ```bash
 cd ~/Piveo
 ```
+
 Lancer Piveo:
+
 ```bash
 ./Piveo_1.2.0_x86_64.AppImage
 ```
@@ -170,13 +176,13 @@ sudo apt install alacarte
 
 ## Liens
 
-- [Site internet](https://gerardlerest.github.io/Piveo/)  
+- [Site internet](https://gerardlerest.github.io/piveo/)  
 - [Dépôt GitHub](https://github.com/GerardLeRest/Piveo)
 
 ## Licence & photos
 
 Ce projet est distribué sous licence **GPL-v3**.  
-© 2025 Gérard LE REST  
+© 2026 Gérard LE REST  
 
 Les portraits ont été générés par une intelligence artificielle et sont utilisés dans un cadre pédagogique non commercial.  
 *"Image by Generated Photos (https://generated.photos), used with permission."*
