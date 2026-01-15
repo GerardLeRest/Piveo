@@ -178,6 +178,7 @@ sudo apt install alacarte
 
 - [Site internet](https://gerardlerest.github.io/piveo/)  
 - [Dépôt GitHub](https://github.com/GerardLeRest/Piveo)
+- [page wiki](https://doc.ubuntu-fr.org/Piveo)
 
 ## Licence & photos
 
