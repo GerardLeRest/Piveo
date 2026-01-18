@@ -2,8 +2,12 @@
 
 ## Fonction du projet
 
-MémoVue est une application éducative développée en Python avec une interface graphique PySide6.  
+MémoVue est une application éducative développée en Python avec une interface graphique PySide6 pour les écoles, les entreprises et les parlementaires
 Elle permet d’apprendre ou de retrouver les noms et prénoms de personnes à partir d'une base de données SQLite3.
+
+<p align="center">
+  <img src="fichiers/images/accueil.png" alt="Accueil">
+</p>
 
 ## Fonctionnement
 
@@ -46,7 +50,7 @@ Le choix de l’organisme se fait au lancement, via **Piveo.pyw**.
 
 ## Installation
 
-### Depuis les sources
+### 🔗 Depuis les sources
 
 1. **Cloner le dépôt**  
    
@@ -70,14 +74,17 @@ Le choix de l’organisme se fait au lancement, via **Piveo.pyw**.
    pip install pyside6
    ```
 
-### Windows
+
+
+### 🪟 Windows
 
 - Aller sur https://github.com/GerardLeRest/Piveo/releases/
 - Sélectionner et télécharger "PiveoSetup-1.1.1.exe"  
 - Suivre les instructions et installer-le sur votre poste Windows.
 - Lancer le logiciel depuis les programmes ou depuis le Bureau
+- 
 
-### GNU/Linux
+### 🐧GNU/Linux
 
 #### 1. Créer un dossier de travail
 
@@ -159,6 +166,10 @@ Lancer Piveo:
 ```
 
 ---
+
+<p align="center">
+  <img src="fichiers/images/piveo.png" alt="Icone">
+</p>
 
 ## (Optionnel) Intégration au menu du système
 
